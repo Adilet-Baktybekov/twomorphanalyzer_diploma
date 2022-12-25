@@ -1,6 +1,7 @@
 from django.shortcuts import render
 import sys
 import csv
+import re
 sys.path.append('../backend/main_analyzer.py')
 from backend.main_analyzer import Word
 from .models import *
@@ -40,24 +41,22 @@ def validate2(request):
    if request.method == 'POST':
 
        sentences = request.POST["words"]
-       sentences_list = sentences.split('.')
+       sentences = str(sentences).strip()
+       #sentences_list = re.split(r'[!.?]', sentences)
        all_text = ''
-       all_res2 = []
        text = ''
-       for sentence in sentences_list:
-           sentence = str(sentence).lstrip()
-           words_list = sentence.split(' ')
-           for word in words_list:
-               ans = Word(word)
-               res = ans.search_word_db(ans.change_word)
-               all_res2.append(res)
-               all_text = all_text + str(ans.result_text)
-           all_text = all_text + '. '
-           words_list.clear()
+       '''for sentence in sentences_list:
+           sentence = str(sentence).lstrip()'''
+       words_list = sentences.split(' ')
+       for word in words_list:
+           word = str(word).strip()
+           ans = Word(word)
+           res = ans.search_word_db(ans.change_word)
+           all_text = all_text + str(ans.result_text)
+
        dict = {
            'sentences': sentences,
-           'res': all_res2,
-           'res2': all_text
+           'res': all_text
        }
        return render(request, 'analyzer_website/response2.html', dict)
 def validate3(request):

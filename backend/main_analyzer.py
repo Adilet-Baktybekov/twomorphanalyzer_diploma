@@ -12,7 +12,7 @@ import backend.Pronoun
 import backend.Adverb
 import time
 import backend.file_reader
-
+is_first_letter_upper = False
 def add_char(word):
     t = ''
     for i in word:
@@ -144,7 +144,6 @@ class Word:
     __first_punctuation_mark = ''
     __last_punctuation_mark = ''
     __word_without_punctuation = ''
-
     def __init__(self, word):
         self.__original_word = word
         self.__word_without_punctuation = word
@@ -1425,12 +1424,14 @@ class Word:
 
     def search_word_db(self,word):
         #self.__original_word
+
         if word[-1] in backend.sourceModule.all_punctuation_marks and word[0] not in backend.sourceModule.all_punctuation_marks:
             self.__last_punctuation_mark = word[-1] + ' '
             self.__word_without_punctuation = word[:-1]
         elif word[-1] not in backend.sourceModule.all_punctuation_marks and word[0] in backend.sourceModule.all_punctuation_marks:
-            self.__first_punctuation_mark = word[-1]
+            self.__first_punctuation_mark = word[0]
             self.__word_without_punctuation = word[1:]
+
         elif word[0] in backend.sourceModule.all_punctuation_marks and word[-1] in backend.sourceModule.all_punctuation_marks:
             self.__first_punctuation_mark = word[0]
             self.__last_punctuation_mark = word[-1] + ' '
@@ -1445,31 +1446,34 @@ class Word:
         elif len(self.__word_without_punctuation) > 2 and (number := backend.Numeral.get_info_numeral_root(nltk.word_tokenize(self.__word_without_punctuation))) != 'none':
             self.set_number(number)
             return self.__number
-        elif self.__word_without_punctuation in backend.Pronoun.all_pronoun:
+        elif self.__word_without_punctuation.lower() in backend.Pronoun.all_pronoun:
             self.__root = self.__word_without_punctuation
             self.__part_of_speech = 'prn'
             self.set_symbols_list('prn')
-            if (symbol := backend.Pronoun.get_info_pronoun_root(self.__word_without_punctuation)) != 'none':
+            if (symbol := backend.Pronoun.get_info_pronoun_root(self.__word_without_punctuation.lower())) != 'none':
                 self.set_symbols_list(symbol)
-            if (symbol := backend.Pronoun.is_sg_or_pl(self.__word_without_punctuation)) != 'none':
+            if (symbol := backend.Pronoun.is_sg_or_pl(self.__word_without_punctuation.lower())) != 'none':
+                self.set_symbols_list(symbol)
+            if (symbol := backend.Pronoun.cases_pronoun_root(self.__word_without_punctuation.lower())) != 'none':
                 self.set_symbols_list(symbol)
             self.set_all_info()
             return self.__all_info
-        elif self.__word_without_punctuation in backend.Adverb.adv_words or self.__word_without_punctuation in backend.Adverb.adv_kosh_words:
+        elif self.__word_without_punctuation.lower() in backend.Adverb.adv_words or self.__word_without_punctuation.lower() in backend.Adverb.adv_kosh_words:
             self.__root = self.__word_without_punctuation
             self.__part_of_speech = 'adv'
             self.set_symbols_list('adv')
             self.set_all_info()
             return self.__all_info
-        elif self.__word_without_punctuation in backend.Numeral.num_root:
+        elif self.__word_without_punctuation.lower() in backend.Numeral.num_root:
             self.__root = self.__word_without_punctuation
             self.__part_of_speech = 'num'
             self.set_symbols_list('num')
             self.set_symbols_list('card')
             self.set_all_info()
+
             return self.__all_info
         else:
-            if (res := backend.file_reader.read_file(self.__word_without_punctuation)) != 'none':
+            if (res := backend.file_reader.read_file(self.__word_without_punctuation.lower())) != 'none':
                 self.__symbols_list = res.copy()
                 self.__part_of_speech = res[0]
                 self.__root = self.__word_without_punctuation
@@ -1477,14 +1481,16 @@ class Word:
                 return self.__all_info
             else:
                 try:
-                    end = self.word_analyze(self.__word_without_punctuation)
+                    end = self.word_analyze(self.__word_without_punctuation.lower())
                     if end == 'end':
                         self.__symbols_list.reverse()
                         self.set_all_info()
                         return self.__all_info
                     else:
+                        self.__result_text = '[' + str(self.__word_without_punctuation) + ']' + self.__last_punctuation_mark
                         return "I dont know this word"
                 except:
+                    self.__result_text = '['+str(self.__word_without_punctuation)+']' + self.__last_punctuation_mark
                     return self.__original_word
 
 
@@ -1504,6 +1510,8 @@ class Word:
     @property
     def part_of_speech(self):
         return self.__part_of_speech
+
+
     @property
     def root(self):
         return self.__root
@@ -1564,7 +1572,7 @@ class Word:
     def set_symbols_list(self, symbol):
         self.__symbols_list.append(symbol)
     def set_all_info(self):
-        if 'sg' and 'pl' in self.__symbols_list:
+        if 'sg' in self.__symbols_list and 'pl' in self.__symbols_list:
             self.__symbols_list.remove('sg')
         for symbol in self.__symbols_list:
             if symbol == '':
@@ -1578,24 +1586,26 @@ class Word:
             elif symbol == 'p3sg' in self.__symbols_list and [sym for sym in backend.sourceModule.face if (sym in self.__symbols_list)]:
                 self.__symbols_list.remove('p3sg')
         self.__symbols_list = [i for i in self.__symbols_list if i]
-        if self.__negiz == '':
-            self.__all_info = "Уңгу: " + str(self.__root) + ".\n" + "Сөз түркүм: " + str(self.__part_of_speech) + \
+
+        self.__all_info = "Уңгу: " + str(self.__root) + ".\n" + "Сөз түркүм: " + str(self.__part_of_speech) + \
                               ".\n" + "Баардык символдор: " + str(list(dict.fromkeys(self.__symbols_list))) + ".\n" + \
                                                            "Мүчөлөр: " + str(self.__symbols) + '\n'
-            symbols_text = ''
-            for key, value in dict(reversed(list(self.__symbols.items()))).items():
-                symbols_text = symbols_text + str(key) + '<' + str(value) + '>'
+        symbols_text = ''
+        ending_symbols =[]
+        for key, value in dict(reversed(list(self.__symbols.items()))).items():
+            symbols_text = symbols_text + str(key) + '<' + str(value) + '>'
+            ending_symbols.append(str(value))
+        for sym in list(dict.fromkeys(self.__symbols_list)):
+            if sym in ending_symbols:
+                self.__symbols_list.remove(sym)
 
-            def_symbols_text = ''
-            for sym in list(dict.fromkeys(self.__symbols_list)):
-                def_symbols_text = def_symbols_text + '<'+str(sym)+ '>'
-            self.__result_text = str(self.__first_punctuation_mark)+str(self.__word_without_punctuation) + \
-                                 "/" + str(self.__root) + def_symbols_text + symbols_text + str(self.__last_punctuation_mark)
+        def_symbols_text = ''
+        for sym in list(dict.fromkeys(self.__symbols_list)):
+            def_symbols_text = def_symbols_text + '<'+str(sym)+ '>'
+        self.__result_text = str(self.__first_punctuation_mark)+str(self.__word_without_punctuation) + \
+                            "/" + str(self.__root) + def_symbols_text + symbols_text + str(self.__last_punctuation_mark)
 
-        else:
-            self.__all_info = "Негиз: " + str(self.__negiz) + "\n" + "Уңгу: " + str(self.__root) + "\n" + \
-                              "Сөз түркүм: " + str(self.__part_of_speech) + \
-                              "\n" + "Баардык символдор: " + str(list(dict.fromkeys(self.__symbols_list))) + "\n" + "Мүчөлөр: " + str(self.__symbols)
+
 
     @info.setter
     def info(self, mylist):
