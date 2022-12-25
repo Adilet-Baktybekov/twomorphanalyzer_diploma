@@ -1,0 +1,75 @@
+{% extends "analyzer_website/base.html" %}
+{% load static %}
+{% block title %}Сөз анализатор{% endblock title %}
+{% block content %}
+    <div class="analyzer">
+        <div class="container" style="height: 800px">
+            <div class="row">
+                <form action="validate" method="post" name="formu1">
+                    {% csrf_token %}
+                    <p class="lead">Морфологиялык анализдөө үчүн cөздү жазып туруп кнопканы басыңыз</p>
+
+                    <input type="text" placeholder="Сөздү жазыңыз" id="wd" name="words"
+                           class="kg-form-input ui-autocomplete-input" autocorrect="off" autocomplete="off"
+                           autocapitalize="off" style="margin-right:5px; padding: 10px 200px; border-radius: 5px;">
+                    <input type="submit" id="btn" class="morfo-button btn btn-info" value="Анализдөө"
+                           style="padding: 10px 80px; margin-bottom: 3px;">
+                    <br>
+                </form>
+                <div class="col-sm-9">
+                    <p style="margin-top: 50px; font-size: 20px">Анализ үчүн киргизилген сөз: {{ word }}</p>
+                    <table style="width:100%">
+                        <tr>
+                            <th>Берилген сөз</th>
+                            <td>{{ word }}</td>
+                        </tr>
+                        <tr>
+                            <th>Сөздүн уңгусу:</th>
+                            <td>{{ root }}</td>
+                        </tr>
+                        <tr>
+                            <th>Кайсыл сөз түркүмүнө кирет:</th>
+                            <td>{{ part_of_speech }}</td>
+                        </tr>
+                        <tr>
+                            <th>Киргизилген сөздүн мүчөлөрү:</th>
+                            <td>{{ all_endings }}</td>
+                        </tr>
+                        <tr>
+                            <th>Мүчөлөрдүн энтектери:</th>
+                            <td>{{ all_symbols }}</td>
+                        </tr>
+                    </table>
+
+                </div>
+                <div class="col-sm-3" style="margin-top: 98px; padding-left: 120px">
+                    <p id="about_text" style="text-align: center">Морфологиялык анализдин толук түшүндүрмөсү төмөнкү файлда жазылган. Файлды жүктөө
+                        үчүн Жүктөө баскычын басыңыз.</p>
+                    <form method="get" action="{% static 'Морфологиялык анализ.pdf' %}">
+                        <button type="submit" class="fa fa-download morfo-button btn btn-info"
+                                style="padding: 10px 40px; margin-bottom: 3px; target: new">Жүктөө
+                        </button>
+                    </form>
+                </div>
+
+                <form action="validate3" method="post" name="formu1">
+                    {% csrf_token %}
+                    <br>
+                    <p class="lead">Туура эмес анализдеген болсо, сөздү бул жерге жазып, кол менен анализдесеңиз болот</p>
+
+                    <input type="text" id="wd2" name="words" value="{{word}}"
+                           class="kg-form-input ui-autocomplete-input" autocorrect="off" autocomplete="off"
+                           autocapitalize="off" style="margin-right:5px; padding: 10px 200px; border-radius: 5px;">
+                    <p class="lead">Символдорду үтүр менен жазыңыз. Мисалы: n, nom, pl, p3sg</p>
+                    <input type="text" placeholder="Символдорду жазыңыз" id="wd3" name="symbols"
+                           class="kg-form-input ui-autocomplete-input" autocorrect="off" autocomplete="off"
+                           autocapitalize="off" style="margin-right:5px; padding: 10px 200px; border-radius: 5px;">
+                    <input type="submit" id="btn2" class="morfo-button btn btn-info" value="Жөнөттүү"
+                           style="padding: 10px 80px; margin-bottom: 3px;">
+                    <br>
+                </form>
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}

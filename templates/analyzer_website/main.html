@@ -1,0 +1,28 @@
+{% extends "analyzer_website/base.html" %}
+{% load static %}
+{% block title %}Башкы бет {% endblock title %}
+{% block content %}
+    <div class="content_section">
+        <div class="container">
+            <div class="row">
+                <div class="col-6">
+                    <img src="{% static "analyzer_website/img/back_img.jpg" %}" height="510px" alt="">
+                </div>
+                <div class="col-6">
+                    <div class="content_text">
+                        <h1 style="color: #212546; align-items: center; font-size: 68px;">Кыргыз тилинин
+                            морфологиясы</h1>
+                        <p style="font-size: 18px;">Кыргыз тилиндеги сөздөрдүн жөндөлүшү,
+                            кандай формалары бар, кандай синонимдер же антонимдери
+                            бар - ушулар жөнүндө толук маалымат ала аласыздар.
+                        </p>
+                        <button class="button_content"><i class="fas fa-greater-than" style="font-size:15px"></i>
+                            <a href="https://tamgasoft.kg/kyrgyz/ky/" target="_blank"
+                               style="color: white; font-size: 18px;">окуп көрүү</a>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

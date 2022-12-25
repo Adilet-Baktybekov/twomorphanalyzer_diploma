@@ -1,0 +1,179 @@
+{% extends "analyzer_website/base.html" %}
+{% load static %}
+{% block title %}Биз жөнүндө{% endblock title %}
+{% block content %}
+    <div class="about">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    {#  о кыргызском языке       #}
+                    {% for i in all_content_kg %}
+                        <div class="content_kg">
+                            <div class="header__text"><h2 style="font-size: 18px;">{{ i.header }}</h2></div>
+                            <br>
+                            <p id="about_text">{{ i.content_kg }}</p>
+                            <br><br>
+                        </div>
+                    {% endfor %}
+
+                    <div class="content_kg">
+                        <div class="header__text"><h2 style="font-size: 18px;">Кыргыз тилинин корпусу</h2></div>
+                        <br>
+                        <p id="about_text">
+                            «Корпус» деген термин латын тилинен «дене,тулку бой, бүтүн бирдик» деп которулат. Белгилүү
+                            британдык тил илимпоздун, Джеффри Личтин берген аныктамасы төмөнкүдөй:
+                            «Корпус көптөгөн лингвистикалык изилдөөлөргө негиз болуп бере турган табигый тилдин
+                            кубулуштар
+                            тууралуу топтогон берилиштердин жыйыны»(2013)
+                            <br>
+                            Демек, «корпус» дегенде бул «электрондук түргө келтирилген, унификацияланган, тилдин ар
+                            кандай
+                            деңгээлинде энтектелип, көптөгөн жанрларга, мезгилдерге, авторолорго ж.б.у.с тиешелүү болгон
+                            тексттердин топтомду» түшүнүүгө тийиш.
+                        </p>
+                        <br><br>
+                    </div>
+
+
+                    <div class="content_kg">
+                        <div class="header__text"><h2 style="font-size: 18px;">Корпустар эмне үчүн түзүлөт?</h2></div>
+                        <br>
+                        <p id="about_text">
+                            Корпустар ар түрдүү лингвистикалык изилдөөлөрдү жүргүзүүгө багытталат. Мисалы, көп аспекттүү
+                            лексикографиялык иштерге өбөлгө түзүп, тарыхый жана заманбап сөздүктөрдү түзүүгө негизги
+                            колдонулуучу аспап болуп берет.
+                            <br>
+                            Ошондой эле, корпустар колдонмо лингвисттер, котормочулар,
+                            окутуучулар, тил илиминин теоретиктер жана учурда актуалдуу болгон компьютердик лингвисттер
+                            үчүн
+                            маалыматтын пайдалуу булагы болуп саналат
+                        </p>
+                    </div>
+
+                    {#   модальные окна  #}
+                    <br>
+                    <div class="header__text">
+                        <h2 style="font-size: 18px;">Морфологиялык анализаторду түшүнүү үчүн ачкыч сөздөр</h2>
+                        <br><br>
+                        <p style="color:#212546; font-size: 16px; font-style: italic;">Ачкыч сөздөр тууралуу
+                            маалматтарды алардын ысымы жазылган баскыч аркылуу көрө аласыз</p>
+                    </div>
+                    <br>
+                    <ul>
+                        {% for c in all_modal_window %}
+                            <li>
+                                <p id="about_text">
+                                    <button id="myBtn"
+                                            style="color: white; padding: 5px; border-radius: 8px;">{{ c.header_modal }}</button>
+                                <div id="myModal" class="modal">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <span class="close">&times;</span>
+                                        </div>
+                                        <div class="modal-body">
+                                            <h5 style="text-align: center;">{{ c.header_modal }}</h5>
+                                            <p style="text-align: justify; font-size: 16px;">{{ c.content_modal }}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <script  defer src="{% static "analyzer_website/js/first.js" %}"></script>
+                                </p>
+                            </li>
+                        {% endfor %}
+
+                        <li>
+                            <p id="about_text">
+                                <button id="myBtn2"
+                                        style="color: white; padding: 5px; border-radius: 8px;">Морфологиялык анализ
+                                    деген эмне?
+                                </button>
+                            <div id="myModal2" class="modal">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <span class="close">&times;</span>
+                                    </div>
+                                    <div class="modal-body">
+                                        <h5 style="text-align: center;">Морфологиялык анализ деген эмне?</h5>
+                                        <p style="text-align: justify; font-size: 16px;">
+                                            Tокен - боштуктар же саптын аягы/башы менен бөлүнгөн тексттин бөлүгү
+                                            (символдордун массиви). Мисалы: Мен Кыргызстанды жакшы көрөм. Бул
+                                            сүйлөмдү боштуктар менен ажыратсак 3 токен чыгат. Андан ары ушул
+                                            токендерге морфологиялык анализ жүргүзүлөт. Морфологиялык анализ -
+                                            берилген токендин леммасын жана негизин табуу, керек учурда
+                                            морфологиялык параметрлерин табуу. Жөнөкөй тил менен айтканда: берилген
+                                            токендин уңгучун, негизин, эгер талап кылынса кандай мүчөлөрдөн
+                                            жасалганын, түзүлгөнүн, токендин уңгусу кайсыл сөз түрүкүмгө кирээрин
+                                            изилдейт. Ар бир мүчөлөр, сөз түркүмдөрү үчүн белгилүү тэгдердин түзүмү
+                                            бар. Тэг - ал мүчөнүн мүнөздөмөсүн кыскартылган формада берет. Мисалы:
+                                            токен: алмалар, алма: уңгу, алма: зат атооч, жансыз, конкретүъү зат
+                                            атооч, -лар: көптүк мүчөнү билдирет жана мунун тэги pl
+                                            <br>
+
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <script defer src="{% static "analyzer_website/js/third_key.js" %}"></script>
+                            </p>
+                        </li>
+
+                        <li>
+                            <p id="about_text">
+                                <button id="myBtn3"
+                                        style="color: white; padding: 5px; border-radius: 8px;">
+                                    Табигый тилди иштетүү
+                                </button>
+                            <div id="myModal3" class="modal">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <span class="close">&times;</span>
+                                    </div>
+                                    <div class="modal-body">
+                                        <h5 style="text-align: center;">Табигый тилди иштетүү</h5>
+                                        <p style="text-align: justify; font-size: 16px;">
+                                            Табигый тилди иштетүү (NLP) бул жасалма интеллекттин жана математикалык
+                                            лингвистиканын жалпы чөйрөсү. Табигый тилдердеги тексттерди компьютердик
+                                            анализдөө жана синтездөө маселелерин изилдейт. Жасалма интеллектке карата
+                                            талдоо, тилди түшүнүү, ал эми синтез сабаттуу текстти түзүү дегенди
+                                            билдирет.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <script defer src="{% static "analyzer_website/js/third.js" %}"></script>
+                            </p>
+                        </li>
+
+                    </ul>
+                    {#   модальные окна end #}
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-9">
+                    <p id="about_text" style="margin-top: 50px;">
+                        Ал эми морфологиялык анализатор морфологиялык анализди автоматташтырат. Морфологиялык
+                        анализаторлор
+                        ар түрдүү жолдор менен жасалат. Тилди мыкты деңгээлге чейин иштетүүгө умтулуу максат болсо
+                        сөзсүз
+                        түрдө жасалма интеллекти колдонулганы дурус болот. Белгилүү болгондой, кыргыз тилинин
+                        морфологиясы
+                        семантикалык жактан татаал, табигый тилди иштетүүгө байланышкан маселелерди чечүү үчүн
+                        морфологиялык
+                        анализ маанилүү кадам болуп саналат.
+                        <br><br>
+                        Азыркы морфологиялык анализатор кыргыз тилиндегиэрежелердин негизинде жасалма интеллектти
+                        колдонбой
+                        түзүлдү. Анализатор толук кандуу туура иштейт деп айтуудан алыспыз, толук иштөө деңгээлине жетүү
+                        үчүн дагы көп изилдөөлөрдү жасоо керек жана жасалма интеллектти колдонуу зарыл.
+                        <br><br>
+                    </p>
+                </div>
+                <div class="col-sm-3"><img src="{% static "analyzer_website/img/aktan-removebg-preview.png" %}" alt=""
+                                           height="400px">
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

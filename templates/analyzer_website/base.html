@@ -1,0 +1,107 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>{% block title %} {% endblock title %}</title>
+    <link rel="stylesheet" type="text/css" href="{% static "analyzer_website/css/bootstrap.min.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static "analyzer_website/css/style.css" %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{% static "analyzer_website/css/responsive.css" %}">
+    <link rel="stylesheet" href="{% static "analyzer_website/css/jquery.mCustomScrollbar.min.css" %}">
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+    <link rel="stylesheet" href="{% static "analyzer_website/css/owl.carousel.min.css" %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css"
+          media="screen">
+    <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+          integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+</head>
+<body>
+<nav class="navbar navbar-expand-md navbar-light">
+    <div class="container-fluid">
+        <a class="navbar-brand" href=""><img src="{% static "analyzer_website/img/logo_morfanalyzer.png" %}"
+                                             width="250px" alt=""></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navabrResponsive">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item active"><a href="{% url 'home' %}" class="nav-link">Башкы бет</a></li>
+                <li class="nav-item"><a href="{% url 'about' %}" class="nav-link">Биз жөнүндө</a></li>
+                <li class="nav-item"><a href="{% url 'analyzer' %}" class="nav-link">Сөз анализатор</a></li>
+                <li class="nav-item"><a href="{% url 'analyzer2' %}" class="nav-link">Сүйлөм анализатор</a></li>
+                <li class="nav-item"><a href="#footer" class="nav-link">Байланыш</a></li>
+                <li class="nav-item dropdown">
+                    <div class="dropdown">
+                        <button onclick="myFunction()" class="dropbtn"
+                                style="background-color: white; border:0; padding:0;"><a
+                                class="nav-link dropdown-toggle" href="#"
+                                id="navbarDarkDropdownMenuLink"
+                                role="button" data-bs-toggle="dropdown"
+                                aria-expanded="false">
+                            <i class="fas fa-globe"></i>
+                        </a>
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-dark"
+                            aria-labelledby="navbarDarkDropdownMenuLink" id="myDropdown">
+                            <li><a class="dropdown-item" href="#">KG</a></li>
+                            <li><a class="dropdown-item" href="#">EN</a></li>
+                        </ul>
+
+                    </div>
+
+                    <script>
+                        function myFunction() {
+                            document.getElementById("myDropdown").classList.toggle("show");
+                        }
+
+                        window.onclick = function (event) {
+                            if (!event.target.matches('.dropbtn')) {
+                                var dropdowns = document.getElementsByClassName("dropdown-content");
+                                var i;
+                                for (i = 0; i < dropdowns.length; i++) {
+                                    var openDropdown = dropdowns[i];
+                                    if (openDropdown.classList.contains('show')) {
+                                        openDropdown.classList.remove('show');
+                                    }
+                                }
+                            }
+                        }
+                    </script>
+
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+{% block content %} {% endblock content %}
+
+<div class="footer" id="footer">
+    <nav class="navbar navbar-expand-md">
+        <div class="container-fluid">
+            <p style="font-size: 18px;">✉: 720044, Бишкек, КЫРГЫЗСТАН Тынчтык проспектиси, 56</p>
+            <div class="collapse navbar-collapse" id="navabrResponsive">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item"><img src="{% static "analyzer_website/img/facebook.png" %}" height="30px"
+                                              width="30px" alt=""></li>
+                    <li class="nav-item" style="padding-left: 10px;"><img
+                            src="{% static "analyzer_website/img/Instagram.svg.png" %}" height="30px" width="30px"
+                            alt=""></li>
+                    <li class="nav-item" style="padding-left: 10px;"><img
+                            src="{% static "analyzer_website/img/youtube.png" %}" height="35px" width="30px"
+                            alt=""></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</div>
+</body>
+</html>
