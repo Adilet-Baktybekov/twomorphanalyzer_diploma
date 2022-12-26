@@ -1455,7 +1455,44 @@ class Word:
             if (symbol := backend.Pronoun.is_sg_or_pl(self.__word_without_punctuation.lower())) != 'none':
                 self.set_symbols_list(symbol)
             if (symbol := backend.Pronoun.cases_pronoun_root(self.__word_without_punctuation.lower())) != 'none':
-                self.set_symbols_list(symbol)
+                if symbol == 'gen':
+                    if self.__word_without_punctuation.lower() == 'анын':
+                        self.set_symbol(symbol, 'нын')
+                        self.__root = 'ал'
+                    elif self.__word_without_punctuation.lower() == 'менин':
+                        self.set_symbol(symbol, 'нин')
+                        self.__root = 'мен'
+                    elif self.__word_without_punctuation.lower() == 'сенин':
+                        self.set_symbol(symbol, 'нин')
+                        self.__root = 'сен'
+                elif symbol == 'dat':
+                    if self.__word_without_punctuation.lower() == 'ага':
+                        self.set_symbol(symbol, 'га')
+                        self.__root = 'ал'
+                    elif self.__word_without_punctuation.lower() == 'мага':
+                        self.set_symbol(symbol, 'га')
+                        self.__root = 'мен'
+                    elif self.__word_without_punctuation.lower() == 'сага':
+                        self.set_symbol(symbol, 'га')
+                        self.__root = 'сен'
+                elif symbol == 'acc':
+                    if self.__word_without_punctuation.lower() == 'аны':
+                        self.set_symbol(symbol, 'ны')
+                        self.__root = 'ал'
+                    elif self.__word_without_punctuation.lower() == 'мени':
+                        self.set_symbol(symbol, 'ни')
+                        self.__root = 'мен'
+                    elif self.__word_without_punctuation.lower() == 'сени':
+                        self.set_symbol(symbol, 'ни')
+                        self.__root = 'сен'
+                elif symbol == 'loc':
+                    if self.__word_without_punctuation.lower() == 'анда':
+                        self.set_symbol(symbol, 'да')
+                        self.__root = 'ал'
+                elif symbol == 'abl':
+                    if self.__word_without_punctuation.lower() == 'андан':
+                        self.set_symbol(symbol, 'дан')
+                        self.__root = 'ал'
             self.set_all_info()
             return self.__all_info
         elif self.__word_without_punctuation.lower() in backend.Adverb.adv_words or self.__word_without_punctuation.lower() in backend.Adverb.adv_kosh_words:
