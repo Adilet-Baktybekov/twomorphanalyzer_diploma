@@ -10,5 +10,6 @@ urlpatterns = [
     path('validate', views.validate, name='validate'),
     path('validate2', views.validate2, name='validate2'),
     path('validate3', views.validate3, name='validate3'),
-    path('upload', views.upload, name='upload')
+    path('upload', views.upload, name='upload'),
+    path('download_file', views.download_file, name='download_file')
 ]

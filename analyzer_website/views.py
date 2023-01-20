@@ -2,6 +2,9 @@ from django.shortcuts import render, redirect
 from django.views.generic import TemplateView, ListView, CreateView
 from django.core.files.storage import FileSystemStorage
 from django.urls import reverse_lazy
+import mimetypes
+from django.http.response import HttpResponse
+import os
 import sys
 import csv
 import re
@@ -97,8 +100,28 @@ def upload(request):
             ans = Word(word)
             res = ans.search_word_db(ans.change_word)
             all_text = all_text + str(ans.result_text) + ' '
+    file = open("myfile.txt", 'w', encoding='UTF8')
+    file.write(str(all_text))
+    file.close()
     dict = {
         'sentences': sentences,
         'res': all_text
     }
     return render(request, 'analyzer_website/response2.html', dict)
+def download_file(request):
+    # Define Django project base directory
+    BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    # Define text file name
+    filename = 'myfile.txt'
+    # Define the full file path
+    filepath = BASE_DIR + '/' + filename
+    # Open the file for reading content
+    path = open(filepath, 'r', encoding='UTF8')
+    # Set the mime type
+    mime_type, _ = mimetypes.guess_type(filepath)
+    # Set the return value of the HttpResponse
+    response = HttpResponse(path, content_type=mime_type)
+    # Set the HTTP header for sending to browser
+    response['Content-Disposition'] = "attachment; filename=%s" % filename
+    # Return the response value
+    return response

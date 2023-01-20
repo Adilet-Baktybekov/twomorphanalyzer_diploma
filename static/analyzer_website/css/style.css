@@ -53,6 +53,7 @@ ul, li {
 
 .footer {
     margin-top: 150px;
+    position: fixed;
 }
 
 
