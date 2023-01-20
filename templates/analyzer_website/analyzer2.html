@@ -7,9 +7,9 @@
             <div class="row">
                 <form action="validate2" method="post">
                     {% csrf_token %}
-                    <p class="lead">Морфологиялык анализдөө үчүн сүйлөмдү жазып туруп кнопканы басыңыз</p>
+                    <p class="lead">Морфологиялык анализдөө үчүн сүйлөмдөрдү жазып туруп кнопканы басыңыз</p>
 
-                    <input type="text" placeholder="Сүйлөмдү жазыңыз" id="wd" name="words"
+                    <input type="text" placeholder="Сүйлөмдөрдү жазыңыз" id="wd" name="words"
                            class="kg-form-input ui-autocomplete-input" autocorrect="off" autocomplete="off"
                            autocapitalize="off" style="margin-right:5px; padding: 10px 200px; border-radius: 5px;">
                     <input type="submit" id="btn" class="morfo-button btn btn-info" value="Анализдөө"
@@ -17,6 +17,20 @@
 
                 </form>
             </div>
+            <div class="col-sm-9">
+                    <p style="margin-top: 50px; font-size: 20px">Upload </p><br>
+                    <form method="post" enctype="multipart/form-data" action="upload">
+                        {% csrf_token %}
+                        <input type="file" name="document">
+                        <button type="submit">Upload file</button>
+                    </form>
+
+
+            </div>
+            <div class="col-sm-9">
+                <p> {{text}}</p>
+            </div>
+
         </div>
     </div>
 

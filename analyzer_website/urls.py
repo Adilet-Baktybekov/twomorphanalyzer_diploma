@@ -1,4 +1,5 @@
 from django.urls import path
+from django.contrib import admin
 from analyzer_website import views
 
 urlpatterns = [
@@ -8,5 +9,6 @@ urlpatterns = [
     path('analyzer2', views.analyzer2, name='analyzer2'),
     path('validate', views.validate, name='validate'),
     path('validate2', views.validate2, name='validate2'),
-    path('validate3', views.validate3, name='validate3')
+    path('validate3', views.validate3, name='validate3'),
+    path('upload', views.upload, name='upload')
 ]

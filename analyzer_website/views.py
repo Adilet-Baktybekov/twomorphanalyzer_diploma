@@ -1,4 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.views.generic import TemplateView, ListView, CreateView
+from django.core.files.storage import FileSystemStorage
+from django.urls import reverse_lazy
 import sys
 import csv
 import re
@@ -28,12 +31,14 @@ def validate(request):
       part_of_speech = ans.part_of_speech
       all_symbols = ans.symbols_list
       all_endings = ans.symbols
+      text_res = ans.result_text
       dict = {
           'word': word,
           'root': root,
           'part_of_speech': part_of_speech,
           'all_symbols': all_symbols,
-          'all_endings': all_endings
+          'all_endings': all_endings,
+          'text': text_res
       }
       return render(request, 'analyzer_website/response.html', dict)
 dict = {}
@@ -52,7 +57,7 @@ def validate2(request):
            word = str(word).strip()
            ans = Word(word)
            res = ans.search_word_db(ans.change_word)
-           all_text = all_text + str(ans.result_text)
+           all_text = all_text + str(ans.result_text) + ' '
 
        dict = {
            'sentences': sentences,
@@ -68,5 +73,32 @@ def validate3(request):
       with open('backend/csv_files/new_words.csv', 'a', encoding='UTF8', newline='') as f:
           writer = csv.writer(f, delimiter=";")
           writer.writerow(arr)
-      return render(request, 'analyzer_website/main.html', dict)
+      return render(request, 'analyzer_website/response.html', dict)
 
+def upload(request):
+    text = ''
+    sentences = ''
+    all_text = ''
+    if request.method == 'POST':
+        uploaded_file = request.FILES['document']
+        text = uploaded_file.read().decode('utf-8', errors='ignore')
+        #text = str(text)[2:]
+        #text = str(text)[:-1]
+        #print(text)
+        #f = open(str(uploaded_file), "r")
+        #print(f.read())
+        sentences = str(text).strip()
+        # sentences_list = re.split(r'[!.?]', sentences)
+        all_text = ''
+        text = ''
+        words_list = sentences.split(' ')
+        for word in words_list:
+            word = str(word).strip()
+            ans = Word(word)
+            res = ans.search_word_db(ans.change_word)
+            all_text = all_text + str(ans.result_text) + ' '
+    dict = {
+        'sentences': sentences,
+        'res': all_text
+    }
+    return render(request, 'analyzer_website/response2.html', dict)

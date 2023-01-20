@@ -1,7 +1,7 @@
 from django.db import models
 
 class KyrgyzLang(models.Model):
-    header = models.CharField(max_length=250)
+    header = models.CharField(max_length=2500)
     content_kg = models.TextField(null=False)
 
     def __str__(self):
@@ -10,7 +10,7 @@ class KyrgyzLang(models.Model):
 
 
 class ModalWindow(models.Model):
-    header_modal = models.CharField(max_length=250)
+    header_modal = models.CharField(max_length=2500)
     content_modal = models.TextField(null=False)
 
     def __str__(self):
