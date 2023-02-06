@@ -1,8 +1,6 @@
 def get_info_noun_ending_from_noun(ending):
    if ending in noun_noun_to_noun_more_used:
       return "n"
-   elif ending in agent_noun:
-      return "agnt"
    elif ending in noun_noun_to_noun_less_used:
       return "n"
    elif ending in noun_noun_to_noun_useless:

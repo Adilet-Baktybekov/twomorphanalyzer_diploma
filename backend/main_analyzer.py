@@ -487,6 +487,17 @@ class Word:
                     else:
                         new_list.reverse()
                         continue
+                elif (symbol := backend.Verb.get_chakchyl(ending)) != 'none':
+                    self.set_symbol(symbol, ending)
+                    self.set_symbols_list(symbol)
+                    new_list.pop(index)
+                    new_list.reverse()
+                    new_word = listToString(new_list)
+                    if self.find_root_from_the_end(new_word):
+                        break
+                    else:
+                        new_list.reverse()
+                        continue
                 elif (symbol := backend.Verb.get_atoochtuk(ending)) != 'none':
                     self.set_symbol(symbol, ending)
                     self.set_symbols_list(symbol)
