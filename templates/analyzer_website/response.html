@@ -11,37 +11,37 @@
 
                     <input type="text" placeholder="Сөздү жазыңыз" id="wd" name="words"
                            class="kg-form-input ui-autocomplete-input" autocorrect="off" autocomplete="off"
-                           autocapitalize="off" style="margin-right:5px; padding: 10px 200px; border-radius: 5px;">
+                           autocapitalize="off" style="margin-right:5px; padding: 10px 200px; border-radius: 5px;" autofocus="autofocus">
                     <input type="submit" id="btn" class="morfo-button btn btn-info" value="Анализдөө"
                            style="padding: 10px 80px; margin-bottom: 3px;">
                     <br>
                 </form>
-                <div class="col-sm-9">
-                    <p style="margin-top: 50px; font-size: 20px">Анализ үчүн киргизилген сөз: {{ word }}</p>
-                    <table style="width:100%">
-                        <tr>
-                            <th>Берилген сөз</th>
-                            <td>{{ word }}</td>
-                        </tr>
-                        <tr>
-                            <th>Сөздүн уңгусу:</th>
-                            <td>{{ root }}</td>
-                        </tr>
-                        <tr>
-                            <th>Кайсыл сөз түркүмүнө кирет:</th>
-                            <td>{{ part_of_speech }}</td>
-                        </tr>
-                        <tr>
-                            <th>Киргизилген сөздүн мүчөлөрү:</th>
-                            <td>{{ all_endings }}</td>
-                        </tr>
-                        <tr>
-                            <th>Мүчөлөрдүн энтектери:</th>
-                            <td>{{ all_symbols }}</td>
-                        </tr>
-                    </table>
+<!--                <div class="col-sm-9">-->
+<!--                    <p style="margin-top: 50px; font-size: 20px">Анализ үчүн киргизилген сөз: {{ word }}</p>-->
+<!--                    <table style="width:100%">-->
+<!--                        <tr>-->
+<!--                            <th>Берилген сөз</th>-->
+<!--                            <td>{{ word }}</td>-->
+<!--                        </tr>-->
+<!--                        <tr>-->
+<!--                            <th>Сөздүн уңгусу:</th>-->
+<!--                            <td>{{ root }}</td>-->
+<!--                        </tr>-->
+<!--                        <tr>-->
+<!--                            <th>Кайсыл сөз түркүмүнө кирет:</th>-->
+<!--                            <td>{{ part_of_speech }}</td>-->
+<!--                        </tr>-->
+<!--                        <tr>-->
+<!--                            <th>Киргизилген сөздүн мүчөлөрү:</th>-->
+<!--                            <td>{{ all_endings }}</td>-->
+<!--                        </tr>-->
+<!--                        <tr>-->
+<!--                            <th>Мүчөлөрдүн энтектери:</th>-->
+<!--                            <td>{{ all_symbols }}</td>-->
+<!--                        </tr>-->
+<!--                    </table>-->
 
-                </div>
+<!--                </div>-->
                 <div class="col-sm-9">
                     <p> {{ text }}</p>
                 </div>

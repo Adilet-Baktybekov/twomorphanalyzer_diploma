@@ -187,6 +187,7 @@ class Word:
             self.__symbols_list = res + list
             self.__symbols_list.reverse()
             self.__root = new_word
+
             return True
         elif new_word in backend.sourceModule.verb:
             self.set_part_of_speech('v')
@@ -476,6 +477,34 @@ class Word:
                         break
                     else:
                         continue
+                elif str_ending[1:] in ['уу','үү','оо','өө']:
+                    if (symbol := backend.Verb.get_gerund(ending[1:])) != 'none':
+                        letter = ending[0]
+                        self.set_symbol(symbol, ending[1:])
+                        self.set_symbols_list(symbol)
+                        new_list.pop(index)
+                        new_list.reverse()
+                        new_word = listToString(new_list)
+                        new_word = new_word + letter
+                        if self.find_root_from_the_end(new_word):
+                            break
+                        else:
+                            new_list.reverse()
+                            continue
+                elif str_ending[1:] in ['аш','ыш','иш','уш', 'үш','өш','ош']:
+                    if (symbol := backend.Verb.get_gerund(ending[1:])) != 'none':
+                        letter = ending[0]
+                        self.set_symbol(symbol, ending[1:])
+                        self.set_symbols_list(symbol)
+                        new_list.pop(index)
+                        new_list.reverse()
+                        new_word = listToString(new_list)
+                        new_word = new_word + letter
+                        if self.find_root_from_the_end(new_word):
+                            break
+                        else:
+                            new_list.reverse()
+                            continue
                 elif (symbol := backend.Verb.get_gerund(ending)) != 'none':
                     self.set_symbol(symbol, ending)
                     self.set_symbols_list(symbol)
@@ -487,6 +516,20 @@ class Word:
                     else:
                         new_list.reverse()
                         continue
+                elif str_ending[1:] in ['ып','ип','уп','үп','ап']:
+                    if (symbol := backend.Verb.get_chakchyl(ending[1:])) != 'none':
+                        letter = ending[0]
+                        self.set_symbol(symbol, ending[1:])
+                        self.set_symbols_list(symbol)
+                        new_list.pop(index)
+                        new_list.reverse()
+                        new_word = listToString(new_list)
+                        new_word = new_word + letter
+                        if self.find_root_from_the_end(new_word):
+                            break
+                        else:
+                            new_list.reverse()
+                            continue
                 elif (symbol := backend.Verb.get_chakchyl(ending)) != 'none':
                     self.set_symbol(symbol, ending)
                     self.set_symbols_list(symbol)
