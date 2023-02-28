@@ -84,7 +84,6 @@
 отур; v; act; imp
 өс; v; act; imp
 деңгээл; n; nom; sg; p3sg
-башта; v; act; imp
 жап; v; act; imp
 кетенчикте; v; act; imp
 сактан; v; act; imp
@@ -244,3 +243,213 @@
 бөлүн; v; act; imp
 угуп; v; gna_perf
 жумуш; n; nom; sg; p3sg
+тол; v; act; imp
+таап; v; gna_perf
+датка; n; nom; sg; p3sg
+бара; v; gna_impf
+чыгуу; v; ger
+изилдеп; v; gna_perf
+аткар; v; act; imp
+фонд; n; nom; sg; p3sg
+тааны; v; act; imp
+ачыл; v; act; imp
+этиш; <n><nom><sg><p3sg>
+кир; v; act; imp
+корго; v; act; imp
+коргоо; v; ger
+коргоп; v; gna_perf
+кошул; v; act; imp
+жарат; v; act; imp
+башта; v; act; imp
+баштап; v; gna_perf
+баштаган; v; act; ind_past
+камсыз; adj
+район; n; nom; sg; p3sg
+замат; adv
+ички; adj
+де; v; act ;imp
+зарыл; mod
+көтөр; v; act; imp
+жазып; v; gna_perf
+сүй; v; act; imp
+элдик; adj
+чыгыш; n; nom; sg; p3sg
+өзүнчө; adv
+буз; v; act; imp
+төмөнкү; adj
+грамматикалык; adj
+сана; v; act; imp
+санал; v; act; imp
+коомдук; adj
+жашаган; v; gpr_perf
+кылым; n; nom; sg; p3sg
+алдоо; v; ger
+алдап; v; gna_perf
+мамлекеттик; adj
+укта; v; act; imp
+уктоо; v; ger
+уктап; v; gna_perf
+туул; v; act; imp
+ырда; v; act; imp
+жүргүз; v; act; imp
+чыга; v; gna_impf
+китепкана; n; nom; sg; p3sg
+колдонуу; v; ger
+башкар; v; act; imp
+алдынча; adv
+танда; v; act; imp
+тандоо; v; ger
+тандап; v; gna_perf
+бөл; v; act; imp
+кийинки; adj
+кошо; v; gna_impf
+сура; v; act; imp
+сурап; v; gna_perf
+согуш; n; nom; sg; p3sg
+унут; v; act; imp
+коюу; v; ger
+орган; n; nom; sg; p3sg
+учуп; v; gna_perf
+эсепте; v; act; imp
+эсептеп; v; gna_perf
+эсептөө; v; ger
+терең; adj
+техникалык; adj
+аке; n; nom; sg; p3sg
+ээле; v; act; imp
+ээлөө; v; ger
+ээлеп; v; gna_perf
+келечек; n; nom; sg; p3sg
+айтылган; v; gpr_perf
+өр; v; act; imp
+котор; v; act; imp
+акыркы; adj
+жарал; v; act; imp
+калтыр; v; act; imp
+үз; v; act; imp
+жыштык; n; nom; sg; p3sg
+сүйлөм; n; nom; sg; p3sg
+төмөндө; v; act; imp
+угул; v; pass; imp
+көчө; n; nom; sg; p3sg
+башкы; adj
+тын; v; act; imp
+сез; v; act; imp
+сунуш; n; nom; sg; p3sg
+ыкма; n; nom; sg; p3sg
+долбоор; n; nom; sg; p3sg
+караш; v; ger_pres
+кезе; n; nom; sg; p3sg
+тиешелүү; adj
+түшүр; v; act; imp
+жылкы; n; nom; sg; p3sg
+өт; v; act; imp
+чакчыл; n; nom; sg; p3sg
+ыраазы; adj
+сал; v; act; imp
+тарыхый; adj
+билдир; v; act; imp
+ула; v; act; imp
+улоо; v; ger
+улап; v; gna_perf
+эки; num; card
+бир; num; card
+үч; num; card
+төрт; num; card
+беш; num; card
+алты; num; card
+жети; num; card
+сегиз; num; card
+тогуз; num; card
+он; num; card
+жыйырма; num; card
+отуз; num; card
+кырк; num; card
+элүү; num; card
+жетимиш; num; card
+алтымыш; num; card
+сексен; num; card
+токсон; num; card
+жүз; num; card
+миң; num; card
+миллион; num; card
+миллиард; num; card
+триллион; num; card
+квадриллион; num; card
+квинтиллион; num; card
+секстиллион; num; card
+септиллион; num; card
+октиллион; num; card
+нониллион; num; card
+ура; ij
+ураа; ij
+изде; v; act; imp
+тайгалан; v; act; imp
+үйрөт; v; act; imp
+сакта; v; act; imp
+сактоо; v; ger
+бекен; post
+министр; n; nom; sg; p3sg
+университет; n; nom; sg; p3sg
+оорузат; n; nom; sg; p3sg
+кон; v; act; imp
+кете; v; gna_impf
+иште; v; act; imp
+душман; n; nom; sg; p3sg
+жаса; v; act; imp
+сонун; adj
+айтса; v; act; cnd
+чейинки; adj
+байыркы; adj
+экономикалык; adj
+экономика; n; nom; sg; p3sg
+түзүлүш; n; nom; sg; p3sg
+кичинекей; adj
+бата; n; nom; sg; p3sg
+жеткир; v; act; imp
+таштоо; v; ger
+таштап; v; gna_perf
+курам; n; nom; sg; p3sg
+түрк; n; nom; sg; p3sg
+жөнөкөй; adj
+калыптыр; v; act; ind_past
+түшүндүр; v; act; imp
+бүткөн; v; act; ind_past
+кубан; v; act; imp
+белгиленген; v; gpr_perf
+текшер; v; act; imp
+жергиликтүү; adj
+сун; v; act; imp
+чурка; v; act; imp
+чуркоо; v; ger
+чуркап; v; gna_perf
+жеп; v; gna_perf
+ошондо; conj
+сол; adj
+оң; adj
+унчук; v; act; imp
+жазылган; v; gpr_perf
+жылдык; adj
+арнал; v; act; imp
+алгачкы; adj
+жасап; v; gna_perf
+сыйла; v; act; imp
+сыйлоо; v; ger
+сыйлап; v; gna_perf
+кээ; cnjcoo
+турса; v; act; cnd
+министрлик; n; nom; sg; p3sg
+кеңири; adj
+этип; v; gna_perf
+баала; v; act; imp
+баалоо; v; ger
+баалап; v; gna_perf
+таян; v; act; imp
+аттан; v; act; imp
+мурдагы; adj
+улант; v; act; imp
+жасоо; v; ger
+ири; adj
+окут; v; act; imp
+табыл; v; pass; imp
+аткан; v; gpr_perf

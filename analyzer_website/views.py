@@ -97,9 +97,10 @@ def upload(request):
         words_list = sentences.split(' ')
         for word in words_list:
             word = str(word).strip()
-            ans = Word(word)
-            res = ans.search_word_db(ans.change_word)
-            all_text = all_text + str(ans.result_text) + ' '
+            if not word == '':
+                ans = Word(word)
+                res = ans.search_word_db(ans.change_word)
+                all_text = all_text + str(ans.result_text) + ' '
     file = open("myfile.txt", 'w', encoding='UTF8')
     file.write(str(all_text))
     file.close()

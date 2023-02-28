@@ -156,14 +156,6 @@ class Word:
             self.__part_of_speech = res[0]
             self.__root = new_word
             return True
-        elif new_word in backend.sourceModule.verb:
-            self.set_part_of_speech('v')
-            self.set_root(new_word)
-            return True
-        elif new_word in backend.Numeral.num_root:
-            self.set_part_of_speech('num')
-            self.set_root(new_word)
-            return True
         elif new_word in backend.sourceModule.adjective:
             self.set_part_of_speech('adj')
             self.set_root(new_word)
@@ -188,14 +180,6 @@ class Word:
             self.__symbols_list.reverse()
             self.__root = new_word
 
-            return True
-        elif new_word in backend.sourceModule.verb:
-            self.set_part_of_speech('v')
-            self.set_negiz(new_word)
-            return True
-        elif new_word in backend.Numeral.num_root:
-            self.set_part_of_speech('num')
-            self.set_negiz(new_word)
             return True
         elif new_word in backend.sourceModule.adjective:
             self.set_part_of_speech('adj')
@@ -226,7 +210,8 @@ class Word:
         self.set_change_word(self.__change_word[1:])
         for ch in self.change_word:
             if self.find_root(new_word):
-                continue
+                pass
+                #continue
             new_word += ch
         ending_list = syllables_of_words
         ending_list.reverse()
@@ -477,6 +462,7 @@ class Word:
                         break
                     else:
                         continue
+
                 elif str_ending[1:] in ['уу','үү','оо','өө']:
                     if (symbol := backend.Verb.get_gerund(ending[1:])) != 'none':
                         letter = ending[0]
@@ -552,20 +538,6 @@ class Word:
                     else:
                         new_list.reverse()
                         continue
-                elif (symbol := backend.Verb.get_voice(ending)) != 'none':
-                    self.set_symbol(symbol, ending)
-                    self.set_symbols_list(symbol)
-                    for sym in self.__symbols_list:
-                        if sym == 'act':#
-                            self.__symbols_list.remove('act')
-                    new_list.pop(index)
-                    new_list.reverse()
-                    new_word = listToString(new_list)
-                    if self.find_root_from_the_end(new_word):
-                        break
-                    else:
-                        new_list.reverse()
-                        continue
                 elif (symbol := backend.Verb.get_mood(ending)) != 'none':
                     self.set_symbol(symbol, ending)
                     self.set_symbols_list(symbol)
@@ -580,6 +552,32 @@ class Word:
                     else:
                         new_list.reverse()
                         continue
+                elif str_ending[1:] in backend.Verb.v_voice_all:
+                    if (symbol := backend.Verb.get_voice(ending[1:])) != 'none':
+                        letter = ending[0]
+                        self.set_symbol(symbol, ending[1:])
+                        self.set_symbols_list(symbol)
+                        new_list.pop(index)
+                        new_list.reverse()
+                        new_word = listToString(new_list)
+                        new_word = new_word + letter
+                        if self.find_root_from_the_end(new_word):
+                            break
+                        else:
+                            new_list.reverse()
+                            continue
+                elif (symbol := backend.Verb.get_voice(ending)) != 'none':
+                    self.set_symbol(symbol, ending)
+                    self.set_symbols_list(symbol)
+                    new_list.pop(index)
+                    new_list.reverse()
+                    new_word = listToString(new_list)
+                    if self.find_root_from_the_end(new_word):
+                        break
+                    else:
+                        new_list.reverse()
+                        continue
+
                 elif (symbol := backend.Cases.get_info_cases(ending)) != 'none':
                     self.set_symbol(symbol, ending)
                     self.set_symbols_list(symbol)
@@ -592,7 +590,7 @@ class Word:
                         new_list.reverse()
                         continue
 
-                elif (symbol := backend.Faces.get_info_backend.Faces(ending)) != 'none':
+                elif (symbol := backend.Faces.get_info_faces(ending)) != 'none':
                     self.set_symbol(symbol, ending)
                     self.set_symbols_list(symbol)
                     for key in list(self.__symbols.keys()):
@@ -937,6 +935,7 @@ class Word:
                         new_list.pop(index)
                         new_list.pop(index-1)
                         new_word = listToString(new_list)
+                        print(new_word)
                         if self.find_root_from_the_end(new_word):
                             break
                         else:
@@ -1539,6 +1538,9 @@ class Word:
                     elif self.__word_without_punctuation.lower() == 'сени':
                         self.set_symbol(symbol, 'ни')
                         self.__root = 'сен'
+                    elif self.__word_without_punctuation.lower() == 'муну':
+                        self.set_symbol(symbol, 'ну')
+                        self.__root = 'бул'
                 elif symbol == 'loc':
                     if self.__word_without_punctuation.lower() == 'анда':
                         self.set_symbol(symbol, 'да')
@@ -1555,14 +1557,7 @@ class Word:
             self.set_symbols_list('adv')
             self.set_all_info()
             return self.__all_info
-        elif self.__word_without_punctuation.lower() in backend.Numeral.num_root:
-            self.__root = self.__word_without_punctuation
-            self.__part_of_speech = 'num'
-            self.set_symbols_list('num')
-            self.set_symbols_list('card')
-            self.set_all_info()
 
-            return self.__all_info
         else:
             if (res := backend.file_reader.read_file(self.__word_without_punctuation.lower())) != 'none':
                 self.__symbols_list = res.copy()
@@ -1676,6 +1671,8 @@ class Word:
                 self.__symbols_list.remove('imp')
             elif symbol == 'p3sg' in self.__symbols_list and [sym for sym in backend.sourceModule.face if (sym in self.__symbols_list)]:
                 self.__symbols_list.remove('p3sg')
+            elif symbol == 'card' in self.__symbols_list and [sym for sym in backend.sourceModule.num_symbols if (sym in self.__symbols_list)]:
+                self.__symbols_list.remove('card')
         self.__symbols_list = [i for i in self.__symbols_list if i]
 
         self.__all_info = "Уңгу: " + str(self.__root) + ".\n" + "Сөз түркүм: " + str(self.__part_of_speech) + \
