@@ -453,3 +453,352 @@
 окут; v; act; imp
 табыл; v; pass; imp
 аткан; v; gpr_perf
+бышыктооч; n; nom; sg; p3sg
+алп; n; nom; sg; p3sg
+адабий; adj
+кайрыл; v; act; imp
+кайтар; v; act; imp
+сык; v; act; imp
+сыгуу; v; ger
+сыгып; v; gna_perf
+айтыш; v; act; imp
+жашыр; v; act; imp
+тынч; adv
+шайлоо; v; ger
+шайла; v; act; imp
+шайлап; v; gna_perf
+аякта; v; act; imp
+аяктоо; v; ger
+аяктап; v; gna_perf
+материал; n; nom; sg; p3sg
+роль; n; nom; sg; p3sg
+камты; v; act; imp
+камтуу; v; ger
+камтып; v; gna_perf
+аталыш; n; nom; sg; p3sg
+салмак; n; nom; sg; p3sg
+дил; n; nom; sg; p3sg
+шаш; v; act; imp
+ошент; v; act; imp
+асыл; adj
+жүгүрт; v; act; imp
+көптө; v; act; imp
+көптөө; v; ger
+көптөп; v; gna_perf
+төрөл; v; act; imp
+принцип; n; nom; sg; p3sg
+кылыш; v; act; imp
+бүгүнкү; adj
+тут; v; act; imp
+кем; adj
+көрсөткүч; n; nom; sg; p3sg
+баянда; v; act; imp
+тарткан; v; act; ind_past
+жетиш; v; act; imp
+кадимки; adj
+кун; n; nom; sg; p3sg
+койсо; v; act; cnd
+соолук; n; nom; sg; p3sg
+ини; n; nom; sg; p3sg
+чаап; v; gna_perf
+тип; n; nom; sg; p3sg
+жолук; v; act; imp
+жолугуу; v; ger
+жолугуп; v; gna_perf
+ашыр; v; act; imp
+чыда; v; act; imp
+чыдап; v; gna_perf
+чыдоо; v; ger
+айлана; n; nom; sg; p3sg
+программа; n; nom; sg; p3sg
+программист; n; nom; sg; p3sg
+процессор; n; nom; sg; p3sg
+процедура; n; nom; sg; p3sg
+диск; n; nom; sg; p3sg
+утилита; n; nom; sg; p3sg
+браузер; n; nom; sg; p3sg
+чычкан; n; nom; sg; p3sg
+клавиатура; n; nom; sg; p3sg
+наушник; n; nom; sg; p3sg
+квант; n; nom; sg; p3sg
+моль; n; nom; sg; p3sg
+протон; n; nom; sg; p3sg
+электрон; n; nom; sg; p3sg
+нейтрон; n; nom; sg; p3sg
+кварк; n; nom; sg; p3sg
+фотон; n; nom; sg; p3sg
+глюон; n; nom; sg; p3sg
+мюон; n; nom; sg; p3sg
+бозон; n; nom; sg; p3sg
+жазма; adj
+окшош; adj
+төмөндөгү; adj
+бекем; adj
+татаал; adj
+кары; adj
+резидент; n; nom; sg; p3sg
+ойло; v; act; imp
+ойлоп; v; gna_perf
+атындагы; adj
+жайгаш; v; act; imp
+түшүн; v; act; imp
+башкача; adj
+институт; n; nom; sg; p3sg
+вуз; n; nom; sg; p3sg
+көптөгөн; adj
+объект; n; nom; sg; p3sg
+минт; v; act; imp
+суутек; n; nom; sg; p3sg
+гелий; n; nom; sg; p3sg
+литий; n; nom; sg; p3sg
+берилий; n; nom; sg; p3sg
+азот; n; nom; sg; p3sg
+кычкылтек; n; nom; sg; p3sg
+фтор; n; nom; sg; p3sg
+неон; n; nom; sg; p3sg
+магний; n; nom; sg; p3sg
+алюминий; n; nom; sg; p3sg
+кремний; n; nom; sg; p3sg
+фосфор; n; nom; sg; p3sg
+хлор; n; nom; sg; p3sg
+аргон; n; nom; sg; p3sg
+калий; n; nom; sg; p3sg
+кальций; n; nom; sg; p3sg
+скандий; n; nom; sg; p3sg
+титан; n; nom; sg; p3sg
+ванадий; n; nom; sg; p3sg
+хром; n; nom; sg; p3sg
+марганец; n; nom; sg; p3sg
+кобальт; n; nom; sg; p3sg
+никель; n; nom; sg; p3sg
+цинк; n; nom; sg; p3sg
+галлий; n; nom; sg; p3sg
+германий; n; nom; sg; p3sg
+мышьяк; n; nom; sg; p3sg
+селен; n; nom; sg; p3sg
+бром; n; nom; sg; p3sg
+криптон; n; nom; sg; p3sg
+рубидий; n; nom; sg; p3sg
+стронций; n; nom; sg; p3sg
+иттрий; n; nom; sg; p3sg
+цирконий; n; nom; sg; p3sg
+ниобий; n; nom; sg; p3sg
+молибден; n; nom; sg; p3sg
+технеций; n; nom; sg; p3sg
+рутений; n; nom; sg; p3sg
+родий; n; nom; sg; p3sg
+палладий; n; nom; sg; p3sg
+кадмий; n; nom; sg; p3sg
+индий; n; nom; sg; p3sg
+сурьма; n; nom; sg; p3sg
+теллур; n; nom; sg; p3sg
+йод; n; nom; sg; p3sg
+ксенон; n; nom; sg; p3sg
+цезий; n; nom; sg; p3sg
+барий; n; nom; sg; p3sg
+лантан; n; nom; sg; p3sg
+церий; n; nom; sg; p3sg
+празеодим; n; nom; sg; p3sg
+неодим; n; nom; sg; p3sg
+прометий; n; nom; sg; p3sg
+самарий; n; nom; sg; p3sg
+европий; n; nom; sg; p3sg
+гадолиний; n; nom; sg; p3sg
+тербий; n; nom; sg; p3sg
+диспрозий; n; nom; sg; p3sg
+гольмий; n; nom; sg; p3sg
+эрбий; n; nom; sg; p3sg
+тулий; n; nom; sg; p3sg
+иттербий; n; nom; sg; p3sg
+лютеций; n; nom; sg; p3sg
+гафний; n; nom; sg; p3sg
+тантал; n; nom; sg; p3sg
+вольфрам; n; nom; sg; p3sg
+рений; n; nom; sg; p3sg
+осмий; n; nom; sg; p3sg
+иридий; n; nom; sg; p3sg
+платина; n; nom; sg; p3sg
+сымап; n; nom; sg; p3sg
+таллий; n; nom; sg; p3sg
+коргошун; n; nom; sg; p3sg
+висмут; n; nom; sg; p3sg
+полоний; n; nom; sg; p3sg
+астат; n; nom; sg; p3sg
+радон; n; nom; sg; p3sg
+франций; n; nom; sg; p3sg
+радий; n; nom; sg; p3sg
+актиний; n; nom; sg; p3sg
+торий; n; nom; sg; p3sg
+протактиний; n; nom; sg; p3sg
+нептуний; n; nom; sg; p3sg
+плутоний; n; nom; sg; p3sg
+америций; n; nom; sg; p3sg
+кюрий; n; nom; sg; p3sg
+берклий; n; nom; sg; p3sg
+калифорний; n; nom; sg; p3sg
+эйнштейний; n; nom; sg; p3sg
+фермий; n; nom; sg; p3sg
+менделевий; n; nom; sg; p3sg
+нобелий; n; nom; sg; p3sg
+лоуренсий; n; nom; sg; p3sg
+резерфордий; n; nom; sg; p3sg
+дубний; n; nom; sg; p3sg
+сиборгий; n; nom; sg; p3sg
+хассий; n; nom; sg; p3sg
+мейтнерий; n; nom; sg; p3sg
+дармштадтий; n; nom; sg; p3sg
+рентгений; n; nom; sg; p3sg
+коперниций; n; nom; sg; p3sg
+нихоний; n; nom; sg; p3sg
+флеровий; n; nom; sg; p3sg
+московий; n; nom; sg; p3sg
+ливерморий; n; nom; sg; p3sg
+теннессин; n; nom; sg; p3sg
+оганесон; n; nom; sg; p3sg
+метан; n; nom; sg; p3sg
+ацетилен; n; nom; sg; p3sg
+этилен; n; nom; sg; p3sg
+этан; n; nom; sg; p3sg
+тоулол; n; nom; sg; p3sg
+глюкоза; n; nom; sg; p3sg
+сахароза; n; nom; sg; p3sg
+глицерин; n; nom; sg; p3sg
+альдегид; n; nom; sg; p3sg
+тыгыздык; n; nom; sg; p3sg
+эритме; n; nom; sg; p3sg
+кислота; n; nom; sg; p3sg
+ион; n; nom; sg; p3sg
+электролит; n; nom; sg; p3sg
+эриткич; n; nom; sg; p3sg
+анилин; n; nom; sg; p3sg
+ацетон; n; nom; sg; p3sg
+бензол; n; nom; sg; p3sg
+камфора; n; nom; sg; p3sg
+нитробензол; n; nom; sg; p3sg
+фенол; n; nom; sg; p3sg
+хлороформ; n; nom; sg; p3sg
+басым; n; nom; sg; p3sg
+ваакум; n; nom; sg; p3sg
+эквивалент; n; nom; sg; p3sg
+атом; n; nom; sg; p3sg
+коэффициент; n; nom; sg; p3sg
+химия; n; nom; sg; p3sg
+органика; n; nom; sg; p3sg
+органикалык; adj
+келишим; n; nom; sg; p3sg
+жыйна; v; act; imp
+жыйнап; v; gna_perf
+жыйноо; v; ger
+коопсуздук; n; nom; sg; p3sg
+сүйлөш; v; act; imp
+чогул; v; act; imp
+ээрчит; v; act; imp
+маданий; adj
+чал; n; nom; sg; p3sg
+лексика; n; nom; sg; p3sg
+даяр; adj
+калыш; v; act; imp
+быш; v; act; imp
+салыштыр; v; act; imp
+тап; v; act; imp
+педагогика; n; nom; sg; p3sg
+бетер; post
+арык; adj
+тал; n; nom; sg; p3sg
+талда; v; act; imp
+талдоо; v; ger
+талдап; v; gna_perf
+өлчөм; n; nom; sg; p3sg
+жыгыл; v; act; imp
+электрондук; adj
+алба; v; act; imp; neg
+оро; v; act; imp
+ороо; v; ger
+ороп; v; gna_perf
+караса; v; act; cnd
+кармаш; v; act; imp
+ажырат; v; act; imp
+узат; v; act; imp
+арын; v; act; imp
+сүйлөп; v; gna_perf
+ченем; n; nom; sg; p3sg
+сына; v; act; imp
+сыноо; v; ger
+сынап; v; gna_perf
+кылын; v; pass; ind
+кошумча; n; nom; sg; p3sg
+саясий; adj
+ойлон; v; act; imp
+курак; n; nom; sg; p3sg
+кыла; n; nom; sg; p3sg
+тапшыр; v; act; imp
+оозеки; adj
+кутул; v; act; imp
+расмий; adj
+ишмердүүлүк; n; nom; sg; p3sg
+керектүү; adj
+колдо; v; act; imp
+колдоо; v; ger
+колдоп; v; gna_perf
+түшөт; v; act; ind_fut
+ыргыт; v; act; imp
+айтыл; v; pass; imp
+бербей; v; neg; gna_impf
+тест; n; nom; sg; p3sg
+бергиле; v; act; imp
+термин; n; nom; sg; p3sg
+төлө; v; act; imp
+төлөп; v; gna_perf
+салат; n; nom; sg; p3sg
+тааныш; v; act; imp
+сап; n; nom; sg; p3sg
+жашын; v; act; imp
+чарча; v; act; imp
+чарчоо; v; ger
+чарчап; v; gna_perf
+бүтүр; v; act; imp
+ката; n; nom; sg; p3sg
+тактооч; n; nom; sg; p3sg
+бошот; v; act; imp
+карабас; v; fut_neg
+туруш; v; ger_pres
+токтол; v; act; imp
+чыгар; v; act; imp
+киргиз; v; act; imp
+курулуш; n; nom; sg; p3sg
+тике; adj
+бактылуу; adj
+мурунку; adj
+айрыкча; adv
+доктор; n; nom; sg; p3sg
+жума; n; nom; sg; p3sg
+шейшемби; n; nom; sg; p3sg
+шаршемби; n; nom; sg; p3sg
+бейшемби; n; nom; sg; p3sg
+ишемби; n; nom; sg; p3sg
+жекшемби; n; nom; sg; p3sg
+көтөрүл; v; act; imp
+укуктук; adj
+жактыр; v; act; imp
+кулжа; n; nom; sg; p3sg
+теке; n; nom; sg; p3sg
+батыш; n; nom; sg; p3sg
+түштүк; n; nom; sg; p3sg
+туруктуу; adj
+айдап; v; gna_perf
+айдоо; v; ger
+жең; v; act; imp
+көн; v; act; imp
+тирүү; adj
+толукта; v; act; imp
+толуктоо; v; ger
+толуктап; v; gna_perf
+аш; v; act; imp
+көбүрөөк; adj
+метод; n; nom; sg; p3sg
+куруу; v; ger
+куруп; v; gna_perf
+ушинт; v; act; imp
+табуу; v; ger
+табып; v; gna_perf
+теория; n; nom; sg; p3sg

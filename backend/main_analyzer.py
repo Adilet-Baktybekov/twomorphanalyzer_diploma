@@ -552,6 +552,17 @@ class Word:
                     else:
                         new_list.reverse()
                         continue
+                elif (symbol := backend.Verb.get_voice(ending)) != 'none':
+                    self.set_symbol(symbol, ending)
+                    self.set_symbols_list(symbol)
+                    new_list.pop(index)
+                    new_list.reverse()
+                    new_word = listToString(new_list)
+                    if self.find_root_from_the_end(new_word):
+                        break
+                    else:
+                        new_list.reverse()
+                        continue
                 elif str_ending[1:] in backend.Verb.v_voice_all:
                     if (symbol := backend.Verb.get_voice(ending[1:])) != 'none':
                         letter = ending[0]
@@ -566,17 +577,7 @@ class Word:
                         else:
                             new_list.reverse()
                             continue
-                elif (symbol := backend.Verb.get_voice(ending)) != 'none':
-                    self.set_symbol(symbol, ending)
-                    self.set_symbols_list(symbol)
-                    new_list.pop(index)
-                    new_list.reverse()
-                    new_word = listToString(new_list)
-                    if self.find_root_from_the_end(new_word):
-                        break
-                    else:
-                        new_list.reverse()
-                        continue
+
 
                 elif (symbol := backend.Cases.get_info_cases(ending)) != 'none':
                     self.set_symbol(symbol, ending)
@@ -1661,6 +1662,7 @@ class Word:
         if 'sg' in self.__symbols_list and 'pl' in self.__symbols_list:
             self.__symbols_list.remove('sg')
         for symbol in self.__symbols_list:
+
             if symbol == '':
                 self.__symbols_list.remove(symbol)
             elif symbol == 'nom' in self.__symbols_list and [sym for sym in backend.sourceModule.case if (sym in self.__symbols_list)]:
@@ -1673,6 +1675,14 @@ class Word:
                 self.__symbols_list.remove('p3sg')
             elif symbol == 'card' in self.__symbols_list and [sym for sym in backend.sourceModule.num_symbols if (sym in self.__symbols_list)]:
                 self.__symbols_list.remove('card')
+            elif symbol == 'act' in self.__symbols_list and [sym for sym in backend.sourceModule.non_finite_verb_forms if (sym in self.__symbols_list)]:
+                self.__symbols_list.remove('act')
+            elif symbol == 'pass' in self.__symbols_list and [sym for sym in backend.sourceModule.non_finite_verb_forms if (sym in self.__symbols_list)]:
+                self.__symbols_list.remove('pass')
+            elif symbol == 'cnd' in self.__symbols_list and [sym for sym in backend.sourceModule.non_finite_verb_forms if (sym in self.__symbols_list)]:
+                self.__symbols_list.remove('cnd')
+            elif symbol == 'imp' in self.__symbols_list and [sym for sym in backend.sourceModule.non_finite_verb_forms if (sym in self.__symbols_list)]:
+                self.__symbols_list.remove('imp')
         self.__symbols_list = [i for i in self.__symbols_list if i]
 
         self.__all_info = "Уңгу: " + str(self.__root) + ".\n" + "Сөз түркүм: " + str(self.__part_of_speech) + \

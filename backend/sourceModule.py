@@ -23,6 +23,8 @@ adjective = {
 case = ['gen','dat','acc','loc','abl']
 voice = ['ref','coop','pass','caus']
 mood = ['ind_pres','ind_past','ind_fut','cnd','niet','tilek']
+non_finite_verb_forms = ['ger','gna_perf','ger_impf','gpr_perf','gpr_fut_neg','gpr_impf', 'gpr_pres', 'gpr_past', 'ger_pres',
+                         'ger_pres']
 face = ['p1sg','p1pl','p2sg','p2pl']
 num_symbols = ['ord', 'top','coll','chamalama']
 consonants_kg = {
