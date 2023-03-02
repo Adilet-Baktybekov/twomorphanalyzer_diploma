@@ -10,124 +10,12 @@ import backend.Numeral
 import backend.Adjectives_2
 import backend.Pronoun
 import backend.Adverb
-import time
 import backend.file_reader
+import backend.check_symbols
+import backend.block_of_noun
+from backend.common import listToString
+from backend.ending_split import ending_split
 is_first_letter_upper = False
-def add_char(word):
-    t = ''
-    for i in word:
-        t += i
-    return t
-
-
-def listToString(s):
-    str1 = ""
-    for ele in s:
-        str1 += ele
-    return str1
-def ending_split(words):
-    syllables_of_words_all = []
-    if len(words) >= 1:
-        for word in words:
-
-            ls_word = list(word)
-            ls_word_orig = list(word)
-            syllables_of_words = []
-            if ls_word_orig[0] in backend.sourceModule.consonants_kg:
-                while True:
-                    if len(ls_word) == 4:
-                        '''if ls_word[0] in backend.sourceModule.consonants_kg and ls_word[1] in backend.sourceModule.consonants_kg and ls_word[
-                            2] in backend.sourceModule.vowels_kg and ls_word[3] in backend.sourceModule.consonants_kg:
-                            syllables_of_words.append(add_char(ls_word))'''
-                        if ls_word[0] in backend.sourceModule.consonants_kg and ls_word[1] in backend.sourceModule.vowels_kg and ls_word[
-                            2] in backend.sourceModule.vowels_kg and ls_word[3] in backend.sourceModule.consonants_kg:
-                            syllables_of_words.append(add_char(ls_word))
-
-                    elif len(ls_word) == 3:
-                        if ls_word[0] in backend.sourceModule.consonants_kg and ls_word[1] in backend.sourceModule.vowels_kg and ls_word[2] in backend.sourceModule.consonants_kg:
-                            syllables_of_words.append(add_char(ls_word))
-                        elif ls_word[0] in backend.sourceModule.consonants_kg and ls_word[1] in backend.sourceModule.vowels_kg and ls_word[2] in backend.sourceModule.vowels_kg:
-                            syllables_of_words.append(add_char(ls_word))
-                    elif len(ls_word) == 2:
-                        if ls_word[0] in backend.sourceModule.consonants_kg and ls_word[1] in backend.sourceModule.vowels_kg:
-                            syllables_of_words.append(add_char(ls_word))
-                    if len(ls_word) == 0:
-                        if len(ls_word_orig) <= 0:
-                            break
-                        else:
-                            for i in range(len(syllables_of_words[-1])):
-                                ls_word_orig.pop()
-                            for i in ls_word_orig:
-                                ls_word.append(i)
-                    elif len(ls_word) != 0:
-                        ls_word.remove(ls_word[0])
-            elif ls_word_orig[0] in backend.sourceModule.vowels_kg:
-                first_letter = ''
-                if len(ls_word_orig) >= 3:
-                    if ls_word_orig[0] in backend.sourceModule.vowels_kg and ls_word_orig[1] in backend.sourceModule.consonants_kg and ls_word_orig[2] in backend.sourceModule.vowels_kg:
-                        first_letter = ls_word_orig[0]
-                        ls_word.remove(ls_word[0])
-                        ls_word_orig.remove(ls_word_orig[0])
-                    elif ls_word_orig[0] in backend.sourceModule.vowels_kg and ls_word_orig[1] in backend.sourceModule.consonants_kg and ls_word_orig[2] in backend.sourceModule.consonants_kg:
-                        first_letter = ls_word_orig[0]+ls_word_orig[1]
-                        ls_word.remove(ls_word[0])
-                        ls_word.remove(ls_word[0])
-                        ls_word_orig.remove(ls_word_orig[0])
-                        ls_word_orig.remove(ls_word_orig[0])
-                    elif ls_word_orig[0] in backend.sourceModule.vowels_kg and ls_word_orig[1] in backend.sourceModule.vowels_kg and ls_word_orig[2] in backend.sourceModule.consonants_kg:
-                        first_letter = ls_word_orig[0]+ls_word_orig[1]
-                        ls_word.remove(ls_word[0])
-                        ls_word.remove(ls_word[0])
-                        ls_word_orig.remove(ls_word_orig[0])
-                        ls_word_orig.remove(ls_word_orig[0])
-                    '''elif ls_word[0] in backend.sourceModule.vowels_kg and ls_word[1] in backend.sourceModule.consonants_kg and ls_word[
-                            2] in backend.sourceModule.consonants_kg and ls_word[3] in backend.sourceModule.vowels_kg:
-                        first_letter = ls_word_orig[0]+ls_word_orig[1]
-                        ls_word.remove(ls_word[0])
-                        ls_word.remove(ls_word[0])
-                        ls_word_orig.remove(ls_word_orig[0])
-                        ls_word_orig.remove(ls_word_orig[0])'''
-
-
-
-                while True:
-                    if len(ls_word) == 4:
-                        if ls_word[0] in backend.sourceModule.consonants_kg and ls_word[1] in backend.sourceModule.vowels_kg and ls_word[
-                            2] in backend.sourceModule.vowels_kg and ls_word[3] in backend.sourceModule.consonants_kg:
-                            syllables_of_words.append(add_char(ls_word))
-                        '''elif ls_word[0] in backend.sourceModule.consonants_kg and ls_word[1] in backend.sourceModule.consonants_kg and ls_word[
-                            2] in backend.sourceModule.vowels_kg and ls_word[3] in backend.sourceModule.consonants_kg:
-                            syllables_of_words.append(add_char(ls_word))'''
-                    elif len(ls_word) == 3:
-                        if ls_word[0] in backend.sourceModule.consonants_kg and ls_word[1] in backend.sourceModule.vowels_kg and ls_word[2] in backend.sourceModule.consonants_kg:
-                            syllables_of_words.append(add_char(ls_word))
-                        elif ls_word[0] in backend.sourceModule.consonants_kg and ls_word[1] in backend.sourceModule.vowels_kg and ls_word[2] in backend.sourceModule.vowels_kg:
-                            syllables_of_words.append(add_char(ls_word))
-
-                    elif len(ls_word) == 2:
-                        if ls_word[0] in backend.sourceModule.consonants_kg and ls_word[1] in backend.sourceModule.vowels_kg:
-                            syllables_of_words.append(add_char(ls_word))
-                    if len(ls_word) == 0:
-                        if len(ls_word_orig) <= 0:
-                            syllables_of_words.append(first_letter)
-                            break
-                        else:
-                            for i in range(len(syllables_of_words[-1])):
-                                ls_word_orig.pop()
-                            for i in ls_word_orig:
-                                ls_word.append(i)
-
-                    elif len(ls_word) != 0:
-                        ls_word.remove(ls_word[0])
-
-            syllables_of_words.reverse()
-            syllables_of_words_all.append(syllables_of_words)
-    else:
-        return False
-    return syllables_of_words_all[0]
-
-
-
 class Word:
     __original_word = ''
     __change_word = ''
@@ -156,10 +44,6 @@ class Word:
             self.__part_of_speech = res[0]
             self.__root = new_word
             return True
-        elif new_word in backend.sourceModule.adjective:
-            self.set_part_of_speech('adj')
-            self.set_root(new_word)
-            return True
         elif new_word in backend.Pronoun.all_pronoun:
             self.set_part_of_speech('prn')
             self.set_root(new_word)
@@ -180,10 +64,6 @@ class Word:
             self.__symbols_list.reverse()
             self.__root = new_word
 
-            return True
-        elif new_word in backend.sourceModule.adjective:
-            self.set_part_of_speech('adj')
-            self.set_negiz(new_word)
             return True
         elif new_word in backend.Pronoun.all_pronoun:
             self.set_part_of_speech('prn')
@@ -211,7 +91,6 @@ class Word:
         for ch in self.change_word:
             if self.find_root(new_word):
                 pass
-                #continue
             new_word += ch
         ending_list = syllables_of_words
         ending_list.reverse()
@@ -221,138 +100,63 @@ class Word:
             index = new_list.index(ending)
             if self.part_of_speech == 'n':
                 if (symbol := backend.Noun.get_info_noun_ending_from_noun(str_ending)) != 'none':
-                    new_list.reverse()
-                    new_word = listToString(new_list)
-                    new_list.reverse()
-                    self.set_root(new_word)
-                    self.set_part_of_speech(symbol)
-                    self.set_symbol('from_n_to_n',ending)
-                    self.set_symbols_list(symbol)
-                    new_list.pop(index)
-                    new_list.reverse()
-
-                    new_word = listToString(new_list)
+                    new_list, new_word = backend.block_of_noun.noun_ending_from_noun(self, index, new_list, symbol, str_ending)
                     if self.find_root_from_the_end(new_word):
                         break
                     else:
-
                         continue
                 elif (symbol := backend.Cases.get_info_cases(ending)) != 'none':
-                    self.set_symbol(symbol, ending)
-                    self.set_symbols_list(symbol)
-                    new_list.pop(index)
-                    new_list.reverse()
-                    new_word = listToString(new_list)
+                    new_list, new_word = backend.block_of_noun.common(self, index, new_list, symbol, str_ending)
                     if self.find_root_from_the_end(new_word):
                         break
                     else:
                         new_list.reverse()
                         continue
-
                 elif (symbol := backend.Faces.get_info_faces(ending)) != 'none':
-                    self.set_symbol(symbol, ending)
-                    self.set_symbols_list(symbol)
-                    for key in list(self.__symbols.keys()):
-                        if ending in backend.Faces.face_2st_sg_politely and key in backend.Others.plural:#сыздар
-                            self.__symbols_list.remove(self.__symbols[ending])
-                            self.__symbols[ending + key] = self.__symbols.pop(ending)
-                            self.__symbols[ending + key] = 'p2pl'
-                            self.__symbols_list.remove(self.__symbols[key])
-                            self.__symbols.pop(key)
-                            self.set_symbols_list('p2pl')
-                        elif ending in backend.Others.negative and key in self.__symbols:#сыз
-                            self.__symbols[ending] = 'neg'
-                            self.set_symbols_list('neg')
-
-                    new_list.pop(index)
-                    new_list.reverse()
-                    new_word = listToString(new_list)
+                    new_list, new_word, self.__symbols_list, self.__symbols = \
+                        backend.block_of_noun.faces(self, index, new_list, symbol, str_ending, self.__symbols_list, self.__symbols)
                     if self.find_root_from_the_end(new_word):
                         break
                     else:
                         new_list.reverse()
                         continue
                 elif (symbol := backend.Others.get_info_other(ending)) != 'none':
-                    self.set_symbol(symbol, ending)
-                    self.set_symbols_list(symbol)
-                    new_list.pop(index)
-                    new_list.reverse()
-                    new_word = listToString(new_list)
+                    new_list, new_word = backend.block_of_noun.common(self, index, new_list, symbol, str_ending)
                     if self.find_root_from_the_end(new_word):
                         break
                     else:
                         new_list.reverse()
                         continue
                 elif (symbol := backend.Possessiveness.get_info_possessive(ending)) != 'none':
-                    self.set_symbol(symbol, ending)
-                    self.set_symbols_list(symbol)
-                    #------------
-                    for key in list(self.__symbols.keys()):
-                        if ending in backend.Possessiveness.posessiveness_for_poses_2st_pl_politely and key in backend.Others.plural:# ыңыздар итд
-                            self.__symbols_list.remove(self.__symbols[ending])
-                            self.__symbols[ending + key] = self.__symbols.pop(ending)
-                            self.__symbols[ending + key] = 'px2pl'
-                            self.__symbols_list.remove(self.__symbols[key])
-                            self.__symbols.pop(key)
-                            self.set_symbols_list('px2pl')
-                        elif ending in backend.Possessiveness.posessiveness_for_face_p2pl and key in backend.Possessiveness.posessiveness_2st_pl: #сыңар
-                            self.__symbols_list.remove(self.__symbols[ending])
-                            self.__symbols[ending + key] = self.__symbols.pop(ending)
-                            self.__symbols[ending + key] = 'p2pl'
-                            self.__symbols_list.remove(self.__symbols[key])
-                            self.__symbols.pop(key)
-                            self.set_symbols_list('p2pl')
-                    #------------
-
-                    new_list.pop(index)
-                    new_list.reverse()
-                    new_word = listToString(new_list)
+                    new_list, new_word, self.__symbols_list, self.__symbols = \
+                        backend.block_of_noun.possessiveness(self, index, new_list, symbol, str_ending, self.__symbols_list,
+                                                    self.__symbols)
                     if self.find_root_from_the_end(new_word):
                         break
                     else:
                         new_list.reverse()
                         continue
                 elif (symbol := backend.Adjectives_2.get_info_adj_noun_to_adj(ending)) != 'none':
-                    new_list.reverse()
-                    self.set_root(new_word)
-                    new_list.reverse()
-
-                    self.set_part_of_speech(symbol)
-                    self.set_symbol('from_n_to_adj', ending)
-                    new_list.pop(index)
-                    new_list.reverse()
-
-                    new_word = listToString(new_list)
+                    new_list, new_word = backend.block_of_noun.noun_to_adj(self, index, new_list, symbol, str_ending, new_word)
                     if self.find_root_from_the_end(new_word):
                         break
                     else:
                         new_list.reverse()
                         continue
-
                 else:
-                    new_list.reverse()
-                    index = new_list.index(ending)
-                    str = listToString(ending)
-                    last_letter = str[-1]
-                    #for posessiveness_general (ныкы) итд
-                    if ending in ['кы', 'ки' , 'ку' , 'кү'] and new_list[index - 1] in backend.sourceModule.posessiveness_general:
-                        new_list[index - 1] = new_list[index - 1] + str
-                        index2 = ending_list.index(ending)
-                        ending_list[index2 + 1] = new_list[index - 1]
-                        new_list.pop(index)
-                        new_list.reverse()
+                    new_list, index, last_letter, str  = \
+                        backend.block_of_noun.noun_exception_1(new_list, str_ending)
+                    # for posessiveness_general (ныкы) итд
+                    if ending in ['кы', 'ки', 'ку', 'кү'] and new_list[index - 1] in backend.sourceModule.posessiveness_general:
+                        new_list, index, ending, ending_list = backend.block_of_noun.noun_exception_2(index, new_list, str_ending, ending_list, str)
                         continue
                     elif len(ending) == 2 and last_letter in backend.sourceModule.special_vowel:
-                        if not self.__symbols:  #px3sp only
-                            new_list[index - 1] = new_list[index - 1] + str[0]
-                            index2 = ending_list.index(ending)
-                            ending_list[index2 + 1] = new_list[index - 1]
+                        if not self.__symbols:  # px3sp only
+                            new_list, index, ending, ending_list, index2 = backend.block_of_noun.\
+                                noun_exception_3(index, new_list, str_ending, ending_list, str)
                             if (symbol := backend.Possessiveness.get_info_possessive(last_letter)) != 'none':
-                                self.set_symbol(symbol, last_letter)
-                                self.set_symbols_list(symbol)
-                                index = new_list.index(str)
-                                new_list.pop(index)
-                                new_word = listToString(new_list)
+                                new_list, index, new_word = backend.block_of_noun.\
+                                noun_exception_4(self, new_list, symbol, last_letter, str)
                                 if self.find_root_from_the_end(new_word):
                                     break
                                 else:
@@ -361,36 +165,22 @@ class Word:
                                     if self.find_root_from_the_end(new_word):
                                         break
                                     else:
-                                        #new_list.reverse()
                                         continue
                         else:
                             is_px3sp = True
-                            for key in list(self.__symbols.keys()): #ыңар, ыбыз, ыңыз
+                            for key in list(self.__symbols.keys()):  # ыңар, ыбыз, ыңыз
                                 if key in backend.Possessiveness.posessiveness_2st_sg_politely or key in backend.Possessiveness.posessiveness_1st_pl or key \
                                         in backend.Possessiveness.posessiveness_2st_pl:
                                     is_px3sp = False
-                                    new_list[index - 1] = new_list[index - 1] + str[0]
-                                    new_ending = list(self.__symbols)[-1]
-                                    self.__symbols[last_letter + new_ending] = self.__symbols.pop(new_ending)
-                                    index2 = ending_list.index(ending)
-                                    ending_list[index2 + 1] = new_list[index - 1]
-                                    new_list.pop(index)
-                                    new_list.reverse()
+                                    index, new_list, last_letter, ending, self.__symbols, ending_list =\
+                                        backend.block_of_noun.noun_exception_5(index, new_list, last_letter, ending, self.__symbols, ending_list, str)
                                 else:
                                     continue
-
-
-                            #px3sp with other endings
+                            # px3sp with other endings
                             if is_px3sp:
-                                new_list[index - 1] = new_list[index - 1] + str[0]
-                                index2 = ending_list.index(ending)
-                                ending_list[index2 + 1] = new_list[index - 1]
+                                new_list, ending_list = backend.block_of_noun.noun_exception_6(index, new_list, ending, ending_list, str)
                                 if (symbol := backend.Possessiveness.get_info_possessive(last_letter)) != 'none':
-                                    self.set_symbol(symbol, last_letter)
-                                    self.set_symbols_list(symbol)
-                                    index = new_list.index(str)
-                                    new_list.pop(index)
-                                    new_word = listToString(new_list)
+                                    new_list, new_word = backend.block_of_noun.noun_exception_7(self, symbol, new_list, last_letter, str)
                                     if self.find_root_from_the_end(new_word):
                                         break
                                     else:
@@ -400,7 +190,7 @@ class Word:
                                             break
                                         else:
                                             continue
-                            else:#ыңар, ыбыз, ыңыз
+                            else:  # ыңар, ыбыз, ыңыз
                                 new_word = listToString(new_list)
                                 if self.find_root_from_the_end(new_word):
                                     break
@@ -410,28 +200,19 @@ class Word:
                                     if self.find_root_from_the_end(new_word):
                                         break
                                     else:
-                                        # new_list.reverse()
                                         continue
-                    #for px1sg(ым) and px2sg(ың)
+                    # for px1sg(ым) and px2sg(ың)
                     else:
                         new_list[index] = str[1:]
                         str = str.replace(str[1:], '')
                         try:
-                            new_list[index + 1] = new_list[index + 1] + str
-                            index2 = ending_list.index(ending)
-                            ending_list[index2 + 1] = new_list[index + 1]
-                            ending_list.pop(index2)
+                            new_list, ending_list = backend.block_of_noun.noun_exception_8(index, new_list, ending, ending_list, str)
                         except:
-                            new_list[index - 1] = new_list[index - 1] + str
-                            index2 = ending_list.index(ending)
-                            ending_list[index2 + 1] = new_list[index - 1]
+                            new_list, ending_list = backend.block_of_noun.noun_exception_9(index, new_list, ending,
+                                                                                         ending_list, str)
                         str = listToString(new_list[index])
                         if (symbol := backend.Possessiveness.get_info_possessive(str)) != 'none':
-                            self.set_symbol(symbol, str)
-                            self.set_symbols_list(symbol)
-                            index = new_list.index(str)
-                            new_list.pop(index)
-                            new_word = listToString(new_list)
+                            new_list, new_word = backend.block_of_noun.noun_exception_10(self, new_list, symbol, str)
                             if self.find_root_from_the_end(new_word):
                                 break
                             else:
@@ -441,6 +222,7 @@ class Word:
                                     break
                                 else:
                                     continue
+
 # -------------------------------------------------------------------------------------------------------------------------
 # -------------------------------------------------------------------------------------------------------------------------
 # -------------------------------------------------------------------------------------------------------------------------
@@ -502,6 +284,21 @@ class Word:
                     else:
                         new_list.reverse()
                         continue
+                elif str_ending[-1] == 'п' and self.find_root_from_the_end(self.__word_without_punctuation.lower()[:-1]):
+                    letters = ending[:-1]
+                    self.set_symbol('gna_perf', 'ып')
+                    self.set_symbols_list('gna_perf')
+                    new_list.pop(index)
+                    new_list.reverse()
+                    new_word = listToString(new_list)
+                    new_word = new_word + letters
+                    if self.find_root_from_the_end(new_word):
+                        break
+                    else:
+                        new_list.reverse()
+                        continue
+
+
                 elif str_ending[1:] in ['ып','ип','уп','үп','ап']:
                     if (symbol := backend.Verb.get_chakchyl(ending[1:])) != 'none':
                         letter = ending[0]
@@ -936,7 +733,6 @@ class Word:
                         new_list.pop(index)
                         new_list.pop(index-1)
                         new_word = listToString(new_list)
-                        print(new_word)
                         if self.find_root_from_the_end(new_word):
                             break
                         else:
@@ -1662,27 +1458,13 @@ class Word:
         if 'sg' in self.__symbols_list and 'pl' in self.__symbols_list:
             self.__symbols_list.remove('sg')
         for symbol in self.__symbols_list:
-
             if symbol == '':
                 self.__symbols_list.remove(symbol)
-            elif symbol == 'nom' in self.__symbols_list and [sym for sym in backend.sourceModule.case if (sym in self.__symbols_list)]:
-                self.__symbols_list.remove('nom')
-            elif symbol == 'act' in self.__symbols_list and [sym for sym in backend.sourceModule.voice if (sym in self.__symbols_list)]:
-                self.__symbols_list.remove('act')
-            elif symbol == 'imp' in self.__symbols_list and [sym for sym in backend.sourceModule.mood if (sym in self.__symbols_list)]:
-                self.__symbols_list.remove('imp')
-            elif symbol == 'p3sg' in self.__symbols_list and [sym for sym in backend.sourceModule.face if (sym in self.__symbols_list)]:
-                self.__symbols_list.remove('p3sg')
-            elif symbol == 'card' in self.__symbols_list and [sym for sym in backend.sourceModule.num_symbols if (sym in self.__symbols_list)]:
-                self.__symbols_list.remove('card')
-            elif symbol == 'act' in self.__symbols_list and [sym for sym in backend.sourceModule.non_finite_verb_forms if (sym in self.__symbols_list)]:
-                self.__symbols_list.remove('act')
-            elif symbol == 'pass' in self.__symbols_list and [sym for sym in backend.sourceModule.non_finite_verb_forms if (sym in self.__symbols_list)]:
-                self.__symbols_list.remove('pass')
-            elif symbol == 'cnd' in self.__symbols_list and [sym for sym in backend.sourceModule.non_finite_verb_forms if (sym in self.__symbols_list)]:
-                self.__symbols_list.remove('cnd')
-            elif symbol == 'imp' in self.__symbols_list and [sym for sym in backend.sourceModule.non_finite_verb_forms if (sym in self.__symbols_list)]:
-                self.__symbols_list.remove('imp')
+        self.__symbols_list = list(dict.fromkeys(self.__symbols_list))#delete duplicates symbols
+        for symbol in self.__symbols_list:
+            self.__symbols_list = backend.check_symbols.delete_symbols(self.__symbols_list, symbol)
+
+
         self.__symbols_list = [i for i in self.__symbols_list if i]
 
         self.__all_info = "Уңгу: " + str(self.__root) + ".\n" + "Сөз түркүм: " + str(self.__part_of_speech) + \
@@ -1709,17 +1491,4 @@ class Word:
     def info(self, mylist):
         self.info = '_'.join(mylist)
 
-start = time.time()
-'''input_string = input('Анализ учун сөз жазыныз: ').strip()
-words = input_string.split(' ')
-for w in words:
-    word = Word(w)
-    res = word.search_word_db(word.change_word)
-    root = word.root
-    part_of_speech = word.part_of_speech
-    all_symbols = word.symbols_list
-    all_endings = word.symbols
 
-    print(res)'''
-end = time.time()
-print(end - start)

@@ -267,7 +267,6 @@
 район; n; nom; sg; p3sg
 замат; adv
 ички; adj
-де; v; act ;imp
 зарыл; mod
 көтөр; v; act; imp
 жазып; v; gna_perf
@@ -422,7 +421,6 @@
 сун; v; act; imp
 чурка; v; act; imp
 чуркоо; v; ger
-чуркап; v; gna_perf
 жеп; v; gna_perf
 ошондо; conj
 сол; adj
@@ -802,3 +800,51 @@
 табуу; v; ger
 табып; v; gna_perf
 теория; n; nom; sg; p3sg
+ашык; adv
+анча; adv
+де; v; act; imp
+өп; v; act; imp
+өбүү; v; ger
+абдан; cnjcoo
+жара; n; nom; sg; p3sg
+жарап; v; gna_perf
+асты; n; nom; sg; p3sg
+көрүнүш; n; nom; sg; p3sg
+жеш; v; ger
+облус; n; nom; sg; p3sg
+ас; v; act; imp
+баса; mod
+даана; adv
+катта; v; act; imp
+канчалык; prn; itg
+көнүгүү; v; ger
+көнүгүп; v; gna_perf
+ушунча; adv
+жуу; v; act; imp
+жубуу; v; ger
+жууп; v; gna_perf
+өмүрүн; n; nom; sg; p3sg; acc
+жөнөт; v; act; imp
+үр; v; act; imp
+дүйнөлүк; adj
+жый; v; act; imp
+биримдик; n; nom; sg; p3sg
+оз; v; act; imp
+кирин; v; act; imp
+кара; v; act; imp
+кайтала; v; act; imp
+кайталап; v; gna_perf
+кайталоо; v; ger
+арна; v; act; imp
+арнап; v; gna_perf
+арноо; v; ger
+каран; v; act; imp
+ат; v; act; imp
+өндүрүш; n; nom; sg; p3sg
+тиле; v; act; imp
+тилеп; v; gna_perf
+тилөө; v; ger
+алдындагы; adv
+кечир; v; act; imp
+аралаш; v; act; imp
+кучакта; v; act; imp

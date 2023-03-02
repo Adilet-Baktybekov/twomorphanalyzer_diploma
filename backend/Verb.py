@@ -147,7 +147,7 @@ def get_chakchyl(ending):
     else:
         return 'none'
 v_chakchyl_gna_perf = {
-    'ып', 'ип','уп','үп'   #
+    'ып', 'ип','уп','үп', 'п'  #
 }
 v_chakchyl_gna_intent = {
     #ганы
