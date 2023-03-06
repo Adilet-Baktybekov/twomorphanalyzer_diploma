@@ -14,6 +14,12 @@ def common(self, index, new_list, symbol, ending):
     new_word = listToString(new_list)
     return new_list, new_word
 
+
+def substantive(symbols_list):#затташып кеткен
+    symbols_list.append('subst')
+    return symbols_list
+
+
 def faces(index, new_list, symbol, ending, symbols_list, symbols):
     symbols[ending] = symbol
     symbols_list.append(symbol)
