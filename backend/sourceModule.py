@@ -12,7 +12,18 @@ posessiveness_general = {
     'ды', 'ди', 'ду', 'дү',
     'ты', 'ти', 'ту', 'тү'
 }
-
+half_of_ending_for_general_possessiveness = ['кы', 'ки', 'ку', 'кү']
+ending_of_gerund = ['уу','үү','оо','өө']
+ending_of_gerund_pres = ['аш','ыш','иш','уш', 'үш','өш','ош']
+ending_of_chakchyl = ['ып','ип','уп','үп','ап']
+v_voice_all_ending = {
+    'ын', 'ан', 'ун', 'үн', 'ың',   #эгин жүгүнөт
+    'ыл', 'ол', 'өл', 'ул', 'үл',
+    'ыш', 'иш',     #кылышты
+    'аш', 'еш', 'уш', 'үш', #иштештик
+    'ыр', 'ир', 'ур', 'үр',
+    'ил'
+}
 case = ['gen','dat','acc','loc','abl']
 voice = ['ref','coop','pass','caus']
 mood = ['ind_pres','ind_past','ind_fut','cnd','niet','tilek']

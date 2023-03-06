@@ -13,6 +13,8 @@ import backend.Adverb
 import backend.file_reader
 import backend.check_symbols
 import backend.block_of_noun
+import backend.block_of_verb
+import backend.common
 from backend.common import listToString
 from backend.ending_split import ending_split
 is_first_letter_upper = False
@@ -106,7 +108,7 @@ class Word:
                     else:
                         continue
                 elif (symbol := backend.Cases.get_info_cases(ending)) != 'none':
-                    new_list, new_word = backend.block_of_noun.common(self, index, new_list, symbol, str_ending)
+                    new_list, new_word = backend.common.common(self, index, new_list, symbol, str_ending)
                     if self.find_root_from_the_end(new_word):
                         break
                     else:
@@ -114,14 +116,14 @@ class Word:
                         continue
                 elif (symbol := backend.Faces.get_info_faces(ending)) != 'none':
                     new_list, new_word, self.__symbols_list, self.__symbols = \
-                        backend.block_of_noun.faces(self, index, new_list, symbol, str_ending, self.__symbols_list, self.__symbols)
+                        backend.common.faces( index, new_list, symbol, str_ending, self.__symbols_list, self.__symbols)
                     if self.find_root_from_the_end(new_word):
                         break
                     else:
                         new_list.reverse()
                         continue
                 elif (symbol := backend.Others.get_info_other(ending)) != 'none':
-                    new_list, new_word = backend.block_of_noun.common(self, index, new_list, symbol, str_ending)
+                    new_list, new_word = backend.common.common(self, index, new_list, symbol, str_ending)
                     if self.find_root_from_the_end(new_word):
                         break
                     else:
@@ -129,7 +131,7 @@ class Word:
                         continue
                 elif (symbol := backend.Possessiveness.get_info_possessive(ending)) != 'none':
                     new_list, new_word, self.__symbols_list, self.__symbols = \
-                        backend.block_of_noun.possessiveness(self, index, new_list, symbol, str_ending, self.__symbols_list,
+                        backend.common.possessiveness(index, new_list, symbol, str_ending, self.__symbols_list,
                                                     self.__symbols)
                     if self.find_root_from_the_end(new_word):
                         break
@@ -145,18 +147,18 @@ class Word:
                         continue
                 else:
                     new_list, index, last_letter, str  = \
-                        backend.block_of_noun.noun_exception_1(new_list, str_ending)
+                        backend.common.common_exception_1(new_list, str_ending)
                     # for posessiveness_general (ныкы) итд
-                    if ending in ['кы', 'ки', 'ку', 'кү'] and new_list[index - 1] in backend.sourceModule.posessiveness_general:
-                        new_list, index, ending, ending_list = backend.block_of_noun.noun_exception_2(index, new_list, str_ending, ending_list, str)
+                    if ending in backend.sourceModule.half_of_ending_for_general_possessiveness and new_list[index - 1] in backend.sourceModule.posessiveness_general:
+                        new_list, index, ending, ending_list = backend.common.common_exception_2(index, new_list, str_ending, ending_list, str)
                         continue
                     elif len(ending) == 2 and last_letter in backend.sourceModule.special_vowel:
                         if not self.__symbols:  # px3sp only
-                            new_list, index, ending, ending_list, index2 = backend.block_of_noun.\
-                                noun_exception_3(index, new_list, str_ending, ending_list, str)
+                            new_list, index, ending, ending_list, index2 = backend.common.common_exception_3\
+                                (index, new_list, str_ending, ending_list, str)
                             if (symbol := backend.Possessiveness.get_info_possessive(last_letter)) != 'none':
-                                new_list, index, new_word = backend.block_of_noun.\
-                                noun_exception_4(self, new_list, symbol, last_letter, str)
+                                new_list, index, new_word = backend.common.common_exception_4\
+                                    (self, new_list, symbol, last_letter, str)
                                 if self.find_root_from_the_end(new_word):
                                     break
                                 else:
@@ -173,14 +175,14 @@ class Word:
                                         in backend.Possessiveness.posessiveness_2st_pl:
                                     is_px3sp = False
                                     index, new_list, last_letter, ending, self.__symbols, ending_list =\
-                                        backend.block_of_noun.noun_exception_5(index, new_list, last_letter, ending, self.__symbols, ending_list, str)
+                                        backend.common.common_exception_5(index, new_list, last_letter, ending, self.__symbols, ending_list, str)
                                 else:
                                     continue
                             # px3sp with other endings
                             if is_px3sp:
-                                new_list, ending_list = backend.block_of_noun.noun_exception_6(index, new_list, ending, ending_list, str)
+                                new_list, ending_list = backend.common.common_exception_6(index, new_list, ending, ending_list, str)
                                 if (symbol := backend.Possessiveness.get_info_possessive(last_letter)) != 'none':
-                                    new_list, new_word = backend.block_of_noun.noun_exception_7(self, symbol, new_list, last_letter, str)
+                                    new_list, new_word = backend.common.common_exception_7(self, symbol, new_list, last_letter, str)
                                     if self.find_root_from_the_end(new_word):
                                         break
                                     else:
@@ -206,13 +208,13 @@ class Word:
                         new_list[index] = str[1:]
                         str = str.replace(str[1:], '')
                         try:
-                            new_list, ending_list = backend.block_of_noun.noun_exception_8(index, new_list, ending, ending_list, str)
+                            new_list, ending_list = backend.common.common_exception_8(index, new_list, ending, ending_list, str)
                         except:
-                            new_list, ending_list = backend.block_of_noun.noun_exception_9(index, new_list, ending,
+                            new_list, ending_list = backend.common.common_exception_9(index, new_list, ending,
                                                                                          ending_list, str)
                         str = listToString(new_list[index])
                         if (symbol := backend.Possessiveness.get_info_possessive(str)) != 'none':
-                            new_list, new_word = backend.block_of_noun.noun_exception_10(self, new_list, symbol, str)
+                            new_list, new_word = backend.common.common_exception_10(self, new_list, symbol, str)
                             if self.find_root_from_the_end(new_word):
                                 break
                             else:
@@ -231,67 +233,38 @@ class Word:
 # -------------------------------------------------------------------------------------------------------------------------
             elif self.part_of_speech == 'v':
                 if (symbol := backend.Verb.get_info_verb_verb_to_verb(str_ending)) != 'none':
-                    new_list.reverse()
-                    new_word = listToString(new_list)
-                    new_list.reverse()
-                    self.set_root(new_word)
-                    self.set_part_of_speech(symbol)
-                    self.set_symbol('from_v_to_v',ending)
-                    new_list.pop(index)
-                    new_list.reverse()
-                    new_word = listToString(new_list)
+                    new_list, new_word = backend.block_of_verb.verb_ending_from_verb(self, index, new_list, symbol,
+                                                                                     str_ending)
                     if self.find_root_from_the_end(new_word):
                         break
                     else:
                         continue
 
-                elif str_ending[1:] in ['уу','үү','оо','өө']:
+                elif str_ending[1:] in backend.sourceModule.ending_of_gerund:
                     if (symbol := backend.Verb.get_gerund(ending[1:])) != 'none':
-                        letter = ending[0]
-                        self.set_symbol(symbol, ending[1:])
-                        self.set_symbols_list(symbol)
-                        new_list.pop(index)
-                        new_list.reverse()
-                        new_word = listToString(new_list)
-                        new_word = new_word + letter
+                        new_list, new_word = backend.block_of_verb.special_gerund(self, ending, symbol, index, new_list)
                         if self.find_root_from_the_end(new_word):
                             break
                         else:
                             new_list.reverse()
                             continue
-                elif str_ending[1:] in ['аш','ыш','иш','уш', 'үш','өш','ош']:
+                elif str_ending[1:] in backend.sourceModule.ending_of_gerund_pres:
                     if (symbol := backend.Verb.get_gerund(ending[1:])) != 'none':
-                        letter = ending[0]
-                        self.set_symbol(symbol, ending[1:])
-                        self.set_symbols_list(symbol)
-                        new_list.pop(index)
-                        new_list.reverse()
-                        new_word = listToString(new_list)
-                        new_word = new_word + letter
+                        new_list, new_word = backend.block_of_verb.special_gerund(self, ending, symbol, index, new_list)
                         if self.find_root_from_the_end(new_word):
                             break
                         else:
                             new_list.reverse()
                             continue
                 elif (symbol := backend.Verb.get_gerund(ending)) != 'none':
-                    self.set_symbol(symbol, ending)
-                    self.set_symbols_list(symbol)
-                    new_list.pop(index)
-                    new_list.reverse()
-                    new_word = listToString(new_list)
+                    new_list, new_word = backend.common.common(self, index, new_list, symbol, ending)
                     if self.find_root_from_the_end(new_word):
                         break
                     else:
                         new_list.reverse()
                         continue
                 elif str_ending[-1] == 'п' and self.find_root_from_the_end(self.__word_without_punctuation.lower()[:-1]):
-                    letters = ending[:-1]
-                    self.set_symbol('gna_perf', 'ып')
-                    self.set_symbols_list('gna_perf')
-                    new_list.pop(index)
-                    new_list.reverse()
-                    new_word = listToString(new_list)
-                    new_word = new_word + letters
+                    new_list, new_word = backend.block_of_verb.special_chakchyl_1(self, ending, index, new_list)
                     if self.find_root_from_the_end(new_word):
                         break
                     else:
@@ -299,89 +272,52 @@ class Word:
                         continue
 
 
-                elif str_ending[1:] in ['ып','ип','уп','үп','ап']:
+                elif str_ending[1:] in backend.sourceModule.ending_of_chakchyl:
                     if (symbol := backend.Verb.get_chakchyl(ending[1:])) != 'none':
-                        letter = ending[0]
-                        self.set_symbol(symbol, ending[1:])
-                        self.set_symbols_list(symbol)
-                        new_list.pop(index)
-                        new_list.reverse()
-                        new_word = listToString(new_list)
-                        new_word = new_word + letter
+                        new_list, new_word = backend.block_of_verb.special_chakchyl_2(self, ending, symbol, index, new_list)
                         if self.find_root_from_the_end(new_word):
                             break
                         else:
                             new_list.reverse()
                             continue
                 elif (symbol := backend.Verb.get_chakchyl(ending)) != 'none':
-                    self.set_symbol(symbol, ending)
-                    self.set_symbols_list(symbol)
-                    new_list.pop(index)
-                    new_list.reverse()
-                    new_word = listToString(new_list)
+                    new_list, new_word = backend.common.common(self, index, new_list, symbol, ending)
                     if self.find_root_from_the_end(new_word):
                         break
                     else:
                         new_list.reverse()
                         continue
                 elif (symbol := backend.Verb.get_atoochtuk(ending)) != 'none':
-                    self.set_symbol(symbol, ending)
-                    self.set_symbols_list(symbol)
-                    new_list.pop(index)
-                    new_list.reverse()
-                    new_word = listToString(new_list)
+                    new_list, new_word = backend.common.common(self, index, new_list, symbol, ending)
                     if self.find_root_from_the_end(new_word):
                         break
                     else:
                         new_list.reverse()
                         continue
                 elif (symbol := backend.Verb.get_mood(ending)) != 'none':
-                    self.set_symbol(symbol, ending)
-                    self.set_symbols_list(symbol)
-                    for sym in self.__symbols_list:
-                        if sym == 'imp':#
-                            self.__symbols_list.remove('imp')
-                    new_list.pop(index)
-                    new_list.reverse()
-                    new_word = listToString(new_list)
+                    new_list, new_word = backend.common.common(self, index, new_list, symbol, ending)
                     if self.find_root_from_the_end(new_word):
                         break
                     else:
                         new_list.reverse()
                         continue
                 elif (symbol := backend.Verb.get_voice(ending)) != 'none':
-                    self.set_symbol(symbol, ending)
-                    self.set_symbols_list(symbol)
-                    new_list.pop(index)
-                    new_list.reverse()
-                    new_word = listToString(new_list)
+                    new_list, new_word = backend.common.common(self, index, new_list, symbol, ending)
                     if self.find_root_from_the_end(new_word):
                         break
                     else:
                         new_list.reverse()
                         continue
-                elif str_ending[1:] in backend.Verb.v_voice_all:
+                elif str_ending[1:] in backend.sourceModule.v_voice_all_ending:
                     if (symbol := backend.Verb.get_voice(ending[1:])) != 'none':
-                        letter = ending[0]
-                        self.set_symbol(symbol, ending[1:])
-                        self.set_symbols_list(symbol)
-                        new_list.pop(index)
-                        new_list.reverse()
-                        new_word = listToString(new_list)
-                        new_word = new_word + letter
+                        new_list, new_word = backend.block_of_verb.special_voice(self, ending, symbol, index, new_list)
                         if self.find_root_from_the_end(new_word):
                             break
                         else:
                             new_list.reverse()
                             continue
-
-
                 elif (symbol := backend.Cases.get_info_cases(ending)) != 'none':
-                    self.set_symbol(symbol, ending)
-                    self.set_symbols_list(symbol)
-                    new_list.pop(index)
-                    new_list.reverse()
-                    new_word = listToString(new_list)
+                    new_list, new_word = backend.common.common(self, index, new_list, symbol, ending)
                     if self.find_root_from_the_end(new_word):
                         break
                     else:
@@ -389,78 +325,32 @@ class Word:
                         continue
 
                 elif (symbol := backend.Faces.get_info_faces(ending)) != 'none':
-                    self.set_symbol(symbol, ending)
-                    self.set_symbols_list(symbol)
-                    for key in list(self.__symbols.keys()):
-                        if ending in backend.Faces.face_2st_sg_politely and key in backend.Others.plural:#сыздар
-                            self.__symbols_list.remove(self.__symbols[ending])
-                            self.__symbols[ending + key] = self.__symbols.pop(ending)
-                            self.__symbols[ending + key] = 'p2pl'
-                            self.__symbols_list.remove(self.__symbols[key])
-                            self.__symbols.pop(key)
-                            self.set_symbols_list('p2pl')
-                        elif ending in backend.Others.negative and key in self.__symbols:#сыз
-                            self.__symbols[ending] = 'neg'
-                            self.set_symbols_list('neg')
-
-                    new_list.pop(index)
-                    new_list.reverse()
-                    new_word = listToString(new_list)
+                    new_list, new_word, self.__symbols_list, self.__symbols = \
+                        backend.common.faces(index, new_list, symbol, str_ending, self.__symbols_list, self.__symbols)
                     if self.find_root_from_the_end(new_word):
                         break
                     else:
                         new_list.reverse()
                         continue
                 elif (symbol := backend.Others.get_info_other(ending)) != 'none':
-                    self.set_symbol(symbol, ending)
-                    self.set_symbols_list(symbol)
-                    new_list.pop(index)
-                    new_list.reverse()
-                    new_word = listToString(new_list)
+                    new_list, new_word = backend.common.common(self, index, new_list, symbol, str_ending)
                     if self.find_root_from_the_end(new_word):
                         break
                     else:
                         new_list.reverse()
                         continue
                 elif (symbol := backend.Possessiveness.get_info_possessive(ending)) != 'none':
-                    self.set_symbol(symbol, ending)
-                    self.set_symbols_list(symbol)
-                    #------------
-                    for key in list(self.__symbols.keys()):
-                        if ending in backend.Possessiveness.posessiveness_for_poses_2st_pl_politely and key in backend.Others.plural:# ыңыздар итд
-                            self.__symbols_list.remove(self.__symbols[ending])
-                            self.__symbols[ending + key] = self.__symbols.pop(ending)
-                            self.__symbols[ending + key] = 'px2pl'
-                            self.__symbols_list.remove(self.__symbols[key])
-                            self.__symbols.pop(key)
-                            self.set_symbols_list('px2pl')
-                        elif ending in backend.Possessiveness.posessiveness_for_face_p2pl and key in backend.Possessiveness.posessiveness_2st_pl: #сыңар
-                            self.__symbols_list.remove(self.__symbols[ending])
-                            self.__symbols[ending + key] = self.__symbols.pop(ending)
-                            self.__symbols[ending + key] = 'p2pl'
-                            self.__symbols_list.remove(self.__symbols[key])
-                            self.__symbols.pop(key)
-                            self.set_symbols_list('p2pl')
-                    #------------
-
-                    new_list.pop(index)
-                    new_list.reverse()
-                    new_word = listToString(new_list)
+                    new_list, new_word, self.__symbols_list, self.__symbols = \
+                        backend.common.possessiveness(index, new_list, symbol, str_ending, self.__symbols_list,
+                                                      self.__symbols)
                     if self.find_root_from_the_end(new_word):
                         break
                     else:
                         new_list.reverse()
                         continue
                 elif (symbol := backend.Noun.get_info_noun_ending_from_verb(ending)) != 'none':
-                    new_list.reverse()
-                    self.set_root(new_word)
-                    new_list.reverse()
-                    self.set_part_of_speech(symbol)
-                    self.set_symbol('from_v_to_n', ending)
-                    new_list.pop(index)
-                    new_list.reverse()
-
-                    new_word = listToString(new_list)
+                    new_list, new_word = backend.block_of_verb.noun_ending_from_verb(self, index, new_list, symbol,
+                                                                                     str_ending)
                     if self.find_root_from_the_end(new_word):
                         break
                     else:
@@ -468,29 +358,22 @@ class Word:
                         continue
 
                 else:
-                    new_list.reverse()
-                    index = new_list.index(ending)
-                    str = listToString(ending)
-                    last_letter = str[-1]
-                    #for posessiveness_general (ныкы) итд
-                    if ending in ['кы', 'ки' , 'ку' , 'кү'] and new_list[index - 1] in backend.sourceModule.posessiveness_general:
-                        new_list[index - 1] = new_list[index - 1] + str
-                        index2 = ending_list.index(ending)
-                        ending_list[index2 + 1] = new_list[index - 1]
-                        new_list.pop(index)
-                        new_list.reverse()
+                    new_list, index, last_letter, str = \
+                        backend.common.common_exception_1(new_list, str_ending)
+                    # for posessiveness_general (ныкы) итд
+                    if ending in backend.sourceModule.half_of_ending_for_general_possessiveness and new_list[
+                        index - 1] in backend.sourceModule.posessiveness_general:
+                        new_list, index, ending, ending_list = backend.common.common_exception_2(index, new_list,
+                                                                                                 str_ending,
+                                                                                                 ending_list, str)
                         continue
                     elif len(ending) == 2 and last_letter in backend.sourceModule.special_vowel:
-                        if not self.__symbols:  #px3sp only
-                            new_list[index - 1] = new_list[index - 1] + str[0]
-                            index2 = ending_list.index(ending)
-                            ending_list[index2 + 1] = new_list[index - 1]
+                        if not self.__symbols:  # px3sp only
+                            new_list, index, ending, ending_list, index2 = backend.common.common_exception_3 \
+                                (index, new_list, str_ending, ending_list, str)
                             if (symbol := backend.Possessiveness.get_info_possessive(last_letter)) != 'none':
-                                self.set_symbol(symbol, last_letter)
-                                self.set_symbols_list(symbol)
-                                index = new_list.index(str)
-                                new_list.pop(index)
-                                new_word = listToString(new_list)
+                                new_list, index, new_word = backend.common.common_exception_4 \
+                                    (self, new_list, symbol, last_letter, str)
                                 if self.find_root_from_the_end(new_word):
                                     break
                                 else:
@@ -499,35 +382,25 @@ class Word:
                                     if self.find_root_from_the_end(new_word):
                                         break
                                     else:
-                                        #new_list.reverse()
                                         continue
                         else:
                             is_px3sp = True
-                            for key in list(self.__symbols.keys()): #ыңар, ыбыз, ыңыз
+                            for key in list(self.__symbols.keys()):  # ыңар, ыбыз, ыңыз
                                 if key in backend.Possessiveness.posessiveness_2st_sg_politely or key in backend.Possessiveness.posessiveness_1st_pl or key \
                                         in backend.Possessiveness.posessiveness_2st_pl:
                                     is_px3sp = False
-                                    new_list[index - 1] = new_list[index - 1] + str[0]
-                                    new_ending = list(self.__symbols)[-1]
-                                    self.__symbols[last_letter + new_ending] = self.__symbols.pop(new_ending)
-                                    index2 = ending_list.index(ending)
-                                    ending_list[index2 + 1] = new_list[index - 1]
-                                    new_list.pop(index)
-                                    new_list.reverse()
-                                    break
+                                    index, new_list, last_letter, ending, self.__symbols, ending_list = \
+                                        backend.common.common_exception_5(index, new_list, last_letter, ending,
+                                                                          self.__symbols, ending_list, str)
                                 else:
                                     continue
-                            #px3sp with other endings
+                            # px3sp with other endings
                             if is_px3sp:
-                                new_list[index - 1] = new_list[index - 1] + str[0]
-                                index2 = ending_list.index(ending)
-                                ending_list[index2 + 1] = new_list[index - 1]
+                                new_list, ending_list = backend.common.common_exception_6(index, new_list, ending,
+                                                                                          ending_list, str)
                                 if (symbol := backend.Possessiveness.get_info_possessive(last_letter)) != 'none':
-                                    self.set_symbol(symbol, last_letter)
-                                    self.set_symbols_list(symbol)
-                                    index = new_list.index(str)
-                                    new_list.pop(index)
-                                    new_word = listToString(new_list)
+                                    new_list, new_word = backend.common.common_exception_7(self, symbol, new_list,
+                                                                                           last_letter, str)
                                     if self.find_root_from_the_end(new_word):
                                         break
                                     else:
@@ -537,7 +410,7 @@ class Word:
                                             break
                                         else:
                                             continue
-                            else:#ыңар, ыбыз, ыңыз
+                            else:  # ыңар, ыбыз, ыңыз
                                 new_word = listToString(new_list)
                                 if self.find_root_from_the_end(new_word):
                                     break
@@ -547,28 +420,20 @@ class Word:
                                     if self.find_root_from_the_end(new_word):
                                         break
                                     else:
-                                        # new_list.reverse()
                                         continue
-                    #for px1sg(ым) and px2sg(ың)
+                    # for px1sg(ым) and px2sg(ың)
                     else:
                         new_list[index] = str[1:]
                         str = str.replace(str[1:], '')
                         try:
-                            new_list[index + 1] = new_list[index + 1] + str
-                            index2 = ending_list.index(ending)
-                            ending_list[index2 + 1] = new_list[index + 1]
-                            ending_list.pop(index2)
+                            new_list, ending_list = backend.common.common_exception_8(index, new_list, ending,
+                                                                                      ending_list, str)
                         except:
-                            new_list[index - 1] = new_list[index - 1] + str
-                            index2 = ending_list.index(ending)
-                            ending_list[index2 + 1] = new_list[index - 1]
+                            new_list, ending_list = backend.common.common_exception_9(index, new_list, ending,
+                                                                                      ending_list, str)
                         str = listToString(new_list[index])
                         if (symbol := backend.Possessiveness.get_info_possessive(str)) != 'none':
-                            self.set_symbol(symbol, str)
-                            self.set_symbols_list(symbol)
-                            index = new_list.index(str)
-                            new_list.pop(index)
-                            new_word = listToString(new_list)
+                            new_list, new_word = backend.common.common_exception_10(self, new_list, symbol, str)
                             if self.find_root_from_the_end(new_word):
                                 break
                             else:
