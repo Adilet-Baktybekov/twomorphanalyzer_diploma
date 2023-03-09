@@ -35,15 +35,13 @@ def validate(request):
       all_symbols = ans.symbols_list
       all_endings = ans.symbols
       text_res = ans.result_text
-      adv = 'adj'
       dict = {
           'word': word,
           'root': root,
           'part_of_speech': part_of_speech,
           'all_symbols': all_symbols,
           'all_endings': all_endings,
-          'text': text_res,
-          'adv': adv
+          'text': text_res
       }
       return render(request, 'analyzer_website/response.html', dict)
 dict = {}
