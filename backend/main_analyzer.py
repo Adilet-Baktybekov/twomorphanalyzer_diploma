@@ -18,6 +18,7 @@ import backend.block_of_numeral
 import backend.block_of_adjective
 import backend.check_punctuation_marks
 import backend.check_special_pronouns
+import backend.get_all_info
 import backend.common
 from backend.common import listToString
 from backend.ending_split import ending_split
@@ -29,11 +30,9 @@ class Word:
     __number = 0
     __root_from_the_end = ''
     __all_info = ''
-    __info = ''
     __part_of_speech = ''
     __symbols = {}
     __symbols_list = []
-    __negiz = ''
     __result_text = ''
     __first_punctuation_mark = ''
     __last_punctuation_mark = ''
@@ -50,14 +49,6 @@ class Word:
             self.__part_of_speech = res[0]
             self.__root = new_word
             return True
-        elif new_word in backend.Pronoun.all_pronoun:
-            self.set_part_of_speech('prn')
-            self.set_root(new_word)
-            return True
-        elif new_word in backend.Adverb.adv_words or new_word in backend.Adverb.adv_kosh_words:
-            self.set_part_of_speech('adv')
-            self.set_root(new_word)
-            return True
         else:
             return False
     def find_root_from_the_end(self, new_word):
@@ -69,19 +60,6 @@ class Word:
             self.__symbols_list = res + list
             self.__symbols_list.reverse()
             self.__root = new_word
-
-            return True
-        elif new_word in backend.Pronoun.all_pronoun:
-            self.set_part_of_speech('prn')
-            self.set_root(new_word)
-            if (symbol := backend.Pronoun.is_sg_or_pl(new_word)) != 'none':
-                self.set_symbols_list(symbol)
-            if (symbol := backend.Pronoun.get_info_pronoun_root(new_word)) != 'none':
-                self.set_symbols_list(symbol)
-            return True
-        elif new_word in backend.Adverb.adv_words or new_word in backend.Adverb.adv_kosh_words:
-            self.set_part_of_speech('adv')
-            self.set_root(new_word)
             return True
         else:
             return False
@@ -128,6 +106,13 @@ class Word:
                         continue
                 elif (symbol := backend.Others.get_info_other(ending)) != 'none':
                     new_list, new_word = backend.common.common(self, index, new_list, symbol, str_ending)
+                    if self.find_root_from_the_end(new_word):
+                        break
+                    else:
+                        new_list.reverse()
+                        continue
+                elif (symbol := backend.Adverb.get_info_adv_ending(ending)) != 'none':
+                    new_list, new_word = backend.block_of_noun.adverb_ending_from_noun(self, index, new_list, symbol, str_ending)
                     if self.find_root_from_the_end(new_word):
                         break
                     else:
@@ -871,12 +856,15 @@ class Word:
 # -------------------------------------------------------------------------------------------------------------------------
 # -------------------------------------------------------------------------------------------------------------------------
             elif self.part_of_speech == "adv":
-                if (symbol := backend.Cases.get_info_cases(ending)) != 'none':
-                    self.set_symbol(symbol, ending)
-                    self.set_symbols_list(symbol)
-                    new_list.pop(index)
-                    new_list.reverse()
-                    new_word = listToString(new_list)
+                if (symbol := backend.Adverb.get_info_adv_ending(ending)) != 'none':
+                    new_list, new_word = backend.common.common(self, index, new_list, symbol, ending)
+                    if self.find_root_from_the_end(new_word):
+                        break
+                    else:
+                        new_list.reverse()
+                        continue
+                elif (symbol := backend.Cases.get_info_cases(ending)) != 'none':
+                    new_list, new_word = backend.common.common(self, index, new_list, symbol, ending)
                     if self.find_root_from_the_end(new_word):
                         break
                     else:
@@ -898,10 +886,8 @@ class Word:
             self.__first_punctuation_mark, self.__last_punctuation_mark, self.__word_without_punctuation = backend.\
                 check_punctuation_marks.situation_3(word)
         if self.__word_without_punctuation.isnumeric():
-            self.__root = self.__word_without_punctuation
-            self.set_symbols_list('num')
-            self.set_symbols_list('card')
-            self.__part_of_speech = 'num'
+            self.__root, self.__symbols_list, self.__part_of_speech = backend.block_of_numeral.if_is_digit(self.__symbols_list,
+                                                                                                      self.__word_without_punctuation)
             self.set_all_info()
             return self.__all_info
         elif self.__word_without_punctuation.lower() in backend.sourceModule.special_pronoun:
@@ -916,12 +902,7 @@ class Word:
                 self.__root = backend.check_special_pronouns.check_pronouns(self, symbol, self.__word_without_punctuation.lower())
             self.set_all_info()
             return self.__all_info
-        elif self.__word_without_punctuation.lower() in backend.Adverb.adv_words or self.__word_without_punctuation.lower() in backend.Adverb.adv_kosh_words:
-            self.__root = self.__word_without_punctuation
-            self.__part_of_speech = 'adv'
-            self.set_symbols_list('adv')
-            self.set_all_info()
-            return self.__all_info
+
 
         else:
             if (res := backend.file_reader.read_file(self.__word_without_punctuation.lower())) != 'none':
@@ -981,17 +962,11 @@ class Word:
     def number(self):
         return self.__number
     @property
-    def negiz(self):
-        return self.__negiz
-    @property
     def root_from_the_end(self):
         return self.__root_from_the_end
     @property
     def all_info(self):
         return self.__all_info
-    @property
-    def info(self):
-        return self.__info
 
     @property
     def change_word(self):
@@ -1008,8 +983,6 @@ class Word:
         return self.__symbols_list.reverse()
     def set_number(self, number):
         self.__number = number
-    def set_negiz(self, negiz):
-        self.__negiz = negiz
     def set_part_of_speech(self, part_of_speech):
         self.__part_of_speech = part_of_speech
     def set_root(self, root):
@@ -1023,40 +996,12 @@ class Word:
     def set_symbols_list(self, symbol):
         self.__symbols_list.append(symbol)
     def set_all_info(self):
-        if 'sg' in self.__symbols_list and 'pl' in self.__symbols_list:
-            self.__symbols_list.remove('sg')
-        for symbol in self.__symbols_list:
-            if symbol == '':
-                self.__symbols_list.remove(symbol)
-        self.__symbols_list = list(dict.fromkeys(self.__symbols_list))#delete duplicates symbols
-        for symbol in self.__symbols_list:
-            self.__symbols_list = backend.check_symbols.delete_symbols(self.__symbols_list, symbol)
+        self.__result_text, self.__all_info = backend.get_all_info.get_info(self.__symbols_list, self.__symbols,
+                                                           self.__root, self.__part_of_speech,
+                                                           self.__first_punctuation_mark,
+                                                           self.__word_without_punctuation,
+                                                           self.__last_punctuation_mark)
 
 
-        self.__symbols_list = [i for i in self.__symbols_list if i]
-
-        self.__all_info = "Уңгу: " + str(self.__root) + ".\n" + "Сөз түркүм: " + str(self.__part_of_speech) + \
-                              ".\n" + "Баардык символдор: " + str(list(dict.fromkeys(self.__symbols_list))) + ".\n" + \
-                                                           "Мүчөлөр: " + str(self.__symbols) + '\n'
-        symbols_text = ''
-        ending_symbols =[]
-        for key, value in dict(reversed(list(self.__symbols.items()))).items():
-            symbols_text = symbols_text + str(key) + '<' + str(value) + '>'
-            ending_symbols.append(str(value))
-        for sym in list(dict.fromkeys(self.__symbols_list)):
-            if sym in ending_symbols:
-                self.__symbols_list.remove(sym)
-
-        def_symbols_text = ''
-        for sym in list(dict.fromkeys(self.__symbols_list)):
-            def_symbols_text = def_symbols_text + '<'+str(sym)+ '>'
-        self.__result_text = str(self.__first_punctuation_mark)+str(self.__word_without_punctuation) + \
-                            "/" + str(self.__root) + def_symbols_text + symbols_text + str(self.__last_punctuation_mark)
-
-
-
-    @info.setter
-    def info(self, mylist):
-        self.info = '_'.join(mylist)
 
 

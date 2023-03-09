@@ -127,7 +127,6 @@ def get_info_numeral(numbers):
         number = number.lower()
         i = get_num(number)
         all_numbers.append(i)
-    # print(all_numbers)
     total_number = get_degree(all_numbers)
     return total_number
 
