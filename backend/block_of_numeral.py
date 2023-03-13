@@ -73,6 +73,6 @@ def not_sure_numeral_2(self, index, symbol, str, new_list):
 def if_is_digit(symbols_list, word_without_punctuation):
     root = word_without_punctuation
     symbols_list.append('num')
-    symbols_list.append('card')
+    symbols_list.append('num_card')
     part_of_speech = 'num'
     return root, symbols_list, part_of_speech

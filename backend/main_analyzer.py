@@ -729,7 +729,7 @@ class Word:
 # -------------------------------------------------------------------------------------------------------------------------
 # -------------------------------------------------------------------------------------------------------------------------
 # -------------------------------------------------------------------------------------------------------------------------
-            elif self.part_of_speech == "prn":
+            elif self.part_of_speech == "pn":
                 if (symbol := backend.Cases.get_info_cases(ending)) != 'none':
                     new_list, new_word = backend.common.common(self, index, new_list, symbol, ending)
                     if self.find_root_from_the_end(new_word):
@@ -892,8 +892,8 @@ class Word:
             return self.__all_info
         elif self.__word_without_punctuation.lower() in backend.sourceModule.special_pronoun:
             self.__root = self.__word_without_punctuation
-            self.__part_of_speech = 'prn'
-            self.set_symbols_list('prn')
+            self.__part_of_speech = 'pn'
+            self.set_symbols_list('pn')
             if (symbol := backend.Pronoun.get_info_pronoun_root(self.__word_without_punctuation.lower())) != 'none':
                 self.set_symbols_list(symbol)
             if (symbol := backend.Pronoun.is_sg_or_pl(self.__word_without_punctuation.lower())) != 'none':
@@ -1001,7 +1001,6 @@ class Word:
                                                            self.__first_punctuation_mark,
                                                            self.__word_without_punctuation,
                                                            self.__last_punctuation_mark)
-
 
 
 

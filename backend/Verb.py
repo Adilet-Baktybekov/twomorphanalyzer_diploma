@@ -43,7 +43,7 @@ def get_mood(ending):
     elif ending in v_mood_subjunctive:
         return 'niet'
     elif ending in v_mood_imperfect:
-        return 'tilek'
+        return 'opt'
     else:
         return 'none'
 #этиштин мамилелери
@@ -135,51 +135,56 @@ v_tense_future = {   #келер чак
 #этиштин өзгөчө формалары
 #чакчыл
 def get_chakchyl(ending):
-    if ending in v_chakchyl_gna_perf:
-        return 'gna_perf'
+    if ending in v_chakchyl_advv_acc:
+        return 'advv_acc'
     else:
         return 'none'
-v_chakchyl_gna_perf = {
+v_chakchyl_advv_acc = {
     'ып', 'ип','уп','үп', 'п'  #
 }
-v_chakchyl_gna_intent = {
-    #ганы
+v_chakchyl_advv_int = {
+    'ганы', 'гени', 'гону', 'гөнү',
+    'каны', 'кени', 'кону', 'көнү'
 }
-v_chakchyl_gna_negative = {
-    #майынча
+v_chakchyl_advv_neg = {
+    'майынча', 'мейинче', 'мойунча', 'мөйүнчө',
+    'майын', 'мейин', 'мойун', 'мөйүн'
 }
-v_chakchyl_gna_suc = {
-    #гыча
-    #ганча
+v_chakchyl_advv_suc= {
+    'гыча', 'гиче', 'гуча', 'гүчө',
+    'кыча', 'киче', 'куча', 'күчө',
+    'ганча', 'генче', 'гончо', 'гөнчө',
+    'канча', 'кенче', 'кончо', 'көнчө'
 }
-v_chakchyl_gna_impf = {   #чакчыл
+v_chakchyl_advv_cont = {   #чакчыл
     'а', 'е', 'ы', 'о', 'ө',
     'й'
 }
 
 #атоочтук
 def get_atoochtuk(ending):
-    if ending in v_atoochtuk_gpr_perf:
-        return 'gpr_perf'
-    elif ending in v_atoochtuk_gpr_fut_neg:
-        return 'gpr_fut_neg'
-    elif ending in v_atoochtuk_gpr_impf:
+    if ending in v_atoochtuk_pcp_ps:
+        return 'pcp_ps'
+    elif ending in v_atoochtuk_pcp_fut_neg:
+        return 'pcp_fut_neg'
+    elif ending in v_atoochtuk_pcp_fut_def:
         return 'gpr_impf'
     elif ending in v_atoochtuk_gpr_pres:
         return 'gpr_pres'
-    elif ending in v_atoochtuk_gpr_past:
-        return 'gpr_past'
+    elif ending in v_atoochtuk_pcp_pr:
+        return 'pcp_pr'
     else:
         return 'none'
-v_atoochtuk_gpr_perf = {
-    'ган','ген', 'гон','гөн'   #эгилген
+v_atoochtuk_pcp_ps = {
+    'ган','ген', 'гон', 'гөн',   #эгилген
+    'кан','кен', 'кон', 'көн'
 
 }
-v_atoochtuk_gpr_fut_neg = {
+v_atoochtuk_pcp_fut_neg = {
     'бас','бес','бос','бөс',    #өлбөс-
     'пас','пес','пос','пөс',
 }
-v_atoochtuk_gpr_impf = {
+v_atoochtuk_pcp_fut_def = {
     'ар','өр','ор','ер',   #агар-
 
     'гыдай','гидей','гудай','гүдөй',     #жаагыдай
@@ -192,7 +197,7 @@ v_atoochtuk_gpr_pres = {
     #аган
     'максан','мексен','мөксөн','моксон'     #билмексен
 }
-v_atoochtuk_gpr_past = {
+v_atoochtuk_pcp_pr = {
     'уучу','үүчү', 'оочу'   #куйкалоочу
 }
 

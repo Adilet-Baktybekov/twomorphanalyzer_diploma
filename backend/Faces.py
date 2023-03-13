@@ -1,12 +1,16 @@
 def get_info_faces(ending):
     if ending in face_1st_sg:
-        return "p1sg"
+        return "1sg"
     elif ending in face_1st_pl:
-        return "p1pl"
-    elif ending in face_2st_sg or ending in face_2st_sg_politely:
-        return "p2sg"
-    elif ending in face_2st_pl or ending in face_2st_pl_politely:
-        return "p2pl"
+        return "1pl"
+    elif ending in face_2st_sg:
+        return "2sg"
+    elif ending in face_2st_sg_politely:
+        return "2sgf"
+    elif ending in face_2st_pl:
+        return "2pl"
+    elif ending in face_2st_pl_politely:
+        return "2plf"
     else:
         return 'none'
 

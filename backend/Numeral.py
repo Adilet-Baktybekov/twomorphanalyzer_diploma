@@ -1,12 +1,16 @@
 def get_info_numeral_ending(ending):
     if ending in num_ending_ordinal:
-        return "ord"
+        return "num_ord"
     elif ending in num_ending_fraction_and_top:
         return "top"
     elif ending in num_ending_collective:
-        return "coll"
-    elif ending in num_ending_not_sure:
-        return "chamalama"
+        return "num_coll"
+    elif ending in num_ending_num_appr1:
+        return "num_appr1"
+    elif ending in num_ending_num_appr2:
+        return "num_appr2"
+    elif ending in num_ending_num_appr3:
+        return "num_appr3"
     else:
         return 'none'
 
@@ -17,12 +21,18 @@ num_ending_ordinal = {  # иреттик сан атооч
 num_ending_collective = {  # жамдама сан атооч
     'оо', 'өө'
 }
-num_ending_not_sure = {  # чамалама сан атооч
+num_ending_num_appr1 = {# чамалама сан атооч
+    'ча', 'чө', 'че', 'чо'
+}
+num_ending_num_appr2 = {
     'дай', 'дой', 'дей', 'дөй',
-    'тай', 'той', 'тей', 'төй',
-    'ча', 'чө', 'че', 'чо',
+    'тай', 'той', 'тей', 'төй'
+}
+num_ending_num_appr3 = {
     'догон', 'дөгөн', 'деген', 'даган',
     'тогон', 'төгөн', 'теген', 'таган',
+}
+num_ending_not_sure = {
     'дук', 'дап', 'дүк', 'дөп', 'деп', 'дик', 'доп',
     'лөп', 'лап', 'леп', 'лоп',
     'тап', 'теп', 'топ', 'төп'
